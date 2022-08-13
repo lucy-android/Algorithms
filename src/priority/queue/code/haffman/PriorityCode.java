@@ -7,7 +7,7 @@ public class PriorityCode {
     public static void main(String[] args) {
 
         PriorityQueue<FrequencyCharacter> characterPriorityQueue = new PriorityQueue<>(30, new FCharComparator());
-        List<FrequencyCharacter> characterList = convertStringToFrequencyCharacterList("gnf'fq[erjngw;ng");
+        List<FrequencyCharacter> characterList = convertStringToFrequencyCharacterList("abacabad");
 
         characterPriorityQueue.addAll(characterList);
 
