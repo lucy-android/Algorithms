@@ -10,10 +10,6 @@ public class FrequencyCharacter {
         this.character = character;
     }
 
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
-    }
-
     public int getFrequency() {
         return frequency;
     }
