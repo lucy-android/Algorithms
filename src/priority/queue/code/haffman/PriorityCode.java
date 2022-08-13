@@ -6,7 +6,7 @@ public class PriorityCode {
 
     public static void main(String[] args) {
 
-        PriorityQueue<String> pq = new PriorityQueue<>(10, new StringComparator());
+        PriorityQueue<String> pq = new PriorityQueue<>(new StringComparator());
 
         pq.add("aaaa");
         pq.add("bb");
@@ -24,5 +24,13 @@ public class PriorityCode {
             chars.add(letter);
         }
         return chars;
+    }
+
+    public static LinkedList<FrequencyCharacter> convertStringToFrequencyCharacter(String input){
+        LinkedList<FrequencyCharacter> frequencyCharacters = new LinkedList<>();
+        for (char letter : input.toCharArray()) {
+
+        }
+        return frequencyCharacters;
     }
 }
