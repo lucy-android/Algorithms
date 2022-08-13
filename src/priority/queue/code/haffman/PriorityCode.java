@@ -14,16 +14,15 @@ public class PriorityCode {
         pq.add("c");
 
         System.out.println(pq);
+        System.out.println(convertStringToLinkedList("sdfsf"));
 
     }
 
-}
-
-
-class StringComparator implements Comparator<String> {
-
-    @Override
-    public int compare(String o1, String o2) {
-        return Integer.compare(o1.length(), o2.length());
+    public static LinkedList<Character> convertStringToLinkedList(String input) {
+        LinkedList<Character> chars = new LinkedList<>();
+        for (char letter : input.toCharArray()) {
+            chars.add(letter);
+        }
+        return chars;
     }
 }
