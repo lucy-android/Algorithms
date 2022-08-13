@@ -6,15 +6,12 @@ public class PriorityCode {
 
     public static void main(String[] args) {
 
-        PriorityQueue<String> pq = new PriorityQueue<>(new StringComparator());
+        PriorityQueue<FrequencyCharacter> characterPriorityQueue = new PriorityQueue<>(30, new FCharComparator());
+        List<FrequencyCharacter> characterList = convertStringToFrequencyCharacterList("gnf'fq[erjngw;ng");
 
-        pq.add("aaaa");
-        pq.add("bb");
-        pq.add("d");
-        pq.add("c");
+        characterPriorityQueue.addAll(characterList);
 
-        System.out.println(pq);
-        System.out.println(convertStringToFrequencyCharacterList("gnf'fq[erjngw;ng"));
+        System.out.println(characterPriorityQueue);
 
     }
 
