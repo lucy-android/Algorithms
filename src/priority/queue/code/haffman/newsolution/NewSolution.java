@@ -16,10 +16,10 @@ class NewSolution {
     }
 
     private static void implementingTheAlgorithmLoop(PriorityQueue<Node> pq) {
-        while (pq.size() > 1){
-            Node firstNode = pq.poll();
-            Node secondNode = pq.poll();
-            Node newNode = new ParentNode(firstNode, secondNode);
+        while (pq.size() > 1) {
+            Node lesserNode = pq.poll();
+            Node biggerNode = pq.poll();
+            Node newNode = new ParentNode(lesserNode, biggerNode);
             pq.add(newNode);
         }
     }
@@ -72,15 +72,20 @@ abstract class Node {
     public void updateFrequency() {
         this.frequency++;
     }
+
+    abstract void updateHuffmanCodeOfAllLeafNodes(boolean bool);
 }
 
 class LeafNode extends Node {
+
+    public StringBuilder huffManCode = new StringBuilder("");
 
     @Override
     public String toString() {
         return "LeafNode{" +
                 "letterChar=" + letterChar +
-                " frequency=" + getFrequency();
+                " frequency=" + getFrequency() +
+                " huffmanCode=" + huffManCode.toString();
     }
 
     private char letterChar;
@@ -95,6 +100,18 @@ class LeafNode extends Node {
         ArrayList<LeafNode> leafNodeArrayList = new ArrayList<>();
         leafNodeArrayList.add(this);
         return leafNodeArrayList;
+    }
+
+    @Override
+    void updateHuffmanCodeOfAllLeafNodes(boolean bool) {
+        StringBuilder newHuffManCode;
+        if (bool) {
+            newHuffManCode = new StringBuilder("1");
+        } else {
+            newHuffManCode = new StringBuilder("0");
+        }
+        newHuffManCode.append(huffManCode.toString());
+        huffManCode.append(newHuffManCode);
     }
 
     public char getLetterChar() {
@@ -115,6 +132,8 @@ class ParentNode extends Node {
         this.letterNode = letterNode;
         this.biggerNode = biggerNode;
         this.setFrequency(letterNode.getFrequency() + biggerNode.getFrequency());
+        letterNode.updateHuffmanCodeOfAllLeafNodes(false);
+        biggerNode.updateHuffmanCodeOfAllLeafNodes(true);
     }
 
     @Override
@@ -127,11 +146,16 @@ class ParentNode extends Node {
     }
 
     @Override
+    void updateHuffmanCodeOfAllLeafNodes(boolean bool) {
+        letterNode.updateHuffmanCodeOfAllLeafNodes(bool);
+        biggerNode.updateHuffmanCodeOfAllLeafNodes(bool);
+    }
+
+    @Override
     public String toString() {
         return "ParentNode{" +
                 "letterNode=" + letterNode +
-                ", biggerNode=" + biggerNode +
-                ", frequency " + getFrequency();
+                ", biggerNode=" + biggerNode;
     }
 }
 
