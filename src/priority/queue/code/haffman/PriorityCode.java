@@ -25,13 +25,20 @@ public class PriorityCode {
                 FrequencyCharacter frequencyCharacter = listFrequency.get(i);
                 frequencyCharacter.setHaffmanCode(createHaffmanCode(i, listFrequency.size()));
             }
+            String code = returnTheObtainedCode(line, listFrequency);
 
-            System.out.print(calculateTheSizeOfTheObtainedCode(line, listFrequency));
+            System.out.println(code.length());
+
+            for (FrequencyCharacter frequencyCharacter : listFrequency) {
+                System.out.println(frequencyCharacter.character + ": " + frequencyCharacter.getHaffmanCode());
+            }
+
+            System.out.println(code);
 
         }
     }
 
-    private static int calculateTheSizeOfTheObtainedCode(String line, ArrayList<FrequencyCharacter> listFrequency) {
+    private static String returnTheObtainedCode(String line, ArrayList<FrequencyCharacter> listFrequency) {
         StringBuilder finalCode = new StringBuilder("");
         char[] charArray = line.toCharArray();
         for (char c : charArray) {
@@ -40,7 +47,7 @@ public class PriorityCode {
             String haffmanCode = frequencyCharacter.getHaffmanCode();
             finalCode.append(haffmanCode);
         }
-        return finalCode.toString().length();
+        return finalCode.toString();
     }
 
     private static String createHaffmanCode(int i, int totalLength) {
