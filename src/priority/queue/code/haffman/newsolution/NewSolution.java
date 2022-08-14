@@ -10,7 +10,7 @@ class NewSolution {
             String line = scanner.nextLine();
             PriorityQueue<Node> pq = transformLineToPriorityQueue(line);
             implementingTheAlgorithmLoop(pq);
-            // System.out.println(pq);
+            System.out.println(pq);
         }
 
     }
@@ -19,6 +19,8 @@ class NewSolution {
         while (pq.size() > 1) {
             Node lesserNode = pq.poll();
             Node biggerNode = pq.poll();
+            lesserNode.updateHuffmanCodeOfAllLeafNodes(true);
+            biggerNode.updateHuffmanCodeOfAllLeafNodes(false);
             Node newNode = new ParentNode(lesserNode, biggerNode);
             pq.add(newNode);
         }
@@ -106,11 +108,12 @@ class LeafNode extends Node {
     void updateHuffmanCodeOfAllLeafNodes(boolean bool) {
         StringBuilder newHuffManCode;
         if (bool) {
-            newHuffManCode = new StringBuilder("1");
-        } else {
             newHuffManCode = new StringBuilder("0");
+        } else {
+            newHuffManCode = new StringBuilder("1");
         }
         newHuffManCode.append(huffManCode.toString());
+        huffManCode = new StringBuilder("");
         huffManCode.append(newHuffManCode);
     }
 
@@ -132,8 +135,6 @@ class ParentNode extends Node {
         this.letterNode = letterNode;
         this.biggerNode = biggerNode;
         this.setFrequency(letterNode.getFrequency() + biggerNode.getFrequency());
-        letterNode.updateHuffmanCodeOfAllLeafNodes(false);
-        biggerNode.updateHuffmanCodeOfAllLeafNodes(true);
     }
 
     @Override
