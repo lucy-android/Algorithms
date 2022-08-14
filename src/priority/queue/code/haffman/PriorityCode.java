@@ -6,7 +6,12 @@ public class PriorityCode {
 
     public static void main(String[] args) {
 
-        PriorityQueue<FrequencyCharacter> characterPriorityQueue = new PriorityQueue<>(30, new FCharComparator());
+        try (Scanner scanner = new Scanner(System.in)) {
+            String line = scanner.nextLine();
+            System.out.println(line + " It's a successful day!");
+        }
+
+        /* PriorityQueue<FrequencyCharacter> characterPriorityQueue = new PriorityQueue<>(30, new FCharComparator());
         List<FrequencyCharacter> characterList = convertStringToFrequencyCharacterList("a");
 
         characterPriorityQueue.addAll(characterList);
@@ -23,6 +28,7 @@ public class PriorityCode {
         }
 
         System.out.println(listFrequency);
+         */
 
     }
 
