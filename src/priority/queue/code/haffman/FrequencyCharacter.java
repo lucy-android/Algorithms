@@ -4,6 +4,7 @@ public class FrequencyCharacter {
 
     public final Character character;
     private int frequency;
+    private StringBuilder haffmanCode = new StringBuilder("");
 
     public FrequencyCharacter(Character character) {
         this.frequency = 1;
@@ -14,8 +15,27 @@ public class FrequencyCharacter {
         return frequency;
     }
 
-    public void upGradeFrequency(){
+    public void upGradeFrequency() {
         this.frequency++;
+    }
+
+    public StringBuilder getHaffmanCode() {
+        return haffmanCode;
+    }
+
+    public void setHaffmanCode(StringBuilder haffmanCode) {
+        this.haffmanCode = haffmanCode;
+    }
+
+    public void updateHaffmanCode(boolean isFirst) {
+        if (haffmanCode.toString().toCharArray()[haffmanCode.toString().toCharArray().length - 1] == '0') {
+            return;
+        }
+        if (isFirst) {
+            haffmanCode.append('0');
+        } else {
+            haffmanCode.append('1');
+        }
     }
 
     @Override
@@ -23,6 +43,6 @@ public class FrequencyCharacter {
         return "FrequencyCharacter{" +
                 "character=" + character +
                 ", frequency=" + frequency +
-                '}';
+                ", haffmanCode=" + haffmanCode;
     }
 }

@@ -11,7 +11,13 @@ public class PriorityCode {
 
         characterPriorityQueue.addAll(characterList);
 
-        System.out.println(characterPriorityQueue);
+        LinkedList<FrequencyCharacter> listFrequency = new LinkedList<>();
+
+        while (characterPriorityQueue.size() > 0) {
+            listFrequency.add(characterPriorityQueue.poll());
+        }
+
+        System.out.println(listFrequency);
 
     }
 
