@@ -9,10 +9,34 @@ class NewSolution {
         try (Scanner scanner = new Scanner(System.in)) {
             String line = scanner.nextLine();
             PriorityQueue<Node> pq = transformLineToPriorityQueue(line);
+            System.out.print(pq.size() + " ");
             implementingTheAlgorithmLoop(pq);
-            System.out.println(pq);
+            assert pq.peek() != null;
+            HashMap<Character, String> map = pq.peek().getMappedChildNodes();
+
+            String finalString = generateFinalString(line, map);
+
+            System.out.println(finalString.length());
+
+
+            for (Map.Entry<Character, String> entry : map.entrySet()) {
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
+
+            System.out.println(finalString);
+
         }
 
+    }
+
+    private static String generateFinalString(String line, HashMap<Character, String> map) {
+        char[] chars = line.toCharArray();
+        StringBuilder stringBuilder = new StringBuilder("");
+        for (char character : chars) {
+            String code = map.get(character);
+            stringBuilder.append(code);
+        }
+        return stringBuilder.toString();
     }
 
     private static void implementingTheAlgorithmLoop(PriorityQueue<Node> pq) {
@@ -30,6 +54,8 @@ class NewSolution {
             Node newNode = new ParentNode(lesserNode, biggerNode);
             pq.add(newNode);
         }
+
+
     }
 
     private static PriorityQueue<Node> transformLineToPriorityQueue(String line) {
@@ -68,6 +94,15 @@ abstract class Node {
     private int frequency;
 
     abstract ArrayList<LeafNode> getAllChildNodes();
+
+    public HashMap<Character, String> getMappedChildNodes() {
+        HashMap<Character, String> map = new HashMap<>();
+        ArrayList<LeafNode> list = getAllChildNodes();
+        for (LeafNode leafNode : list) {
+            map.put(leafNode.getLetterChar(), leafNode.huffManCode.toString());
+        }
+        return map;
+    }
 
     public int getFrequency() {
         return frequency;
