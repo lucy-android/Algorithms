@@ -1,9 +1,6 @@
 package priority.queue.code.haffman.newsolution;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 
 class NewSolution {
 
@@ -18,6 +15,32 @@ class NewSolution {
     }
 
     private static PriorityQueue<Node> transformLineToPriorityQueue(String line) {
+        PriorityQueue<Node> nodePriorityQueue = new PriorityQueue<>(new NodeComparator());
+        List<LeafNode> leafNodes = new LinkedList<>();
+        char[] charArray = line.toCharArray();
+        for (char character : charArray) {
+            LeafNode leafNode = getLeafNode(leafNodes, character);
+            if (leafNode != null) {
+                leafNode.updateFrequency();
+            } else {
+                LeafNode leafNode1 = new LeafNode(character);
+                leafNodes.add(leafNode1);
+            }
+
+        }
+
+        nodePriorityQueue.addAll(leafNodes);
+
+        return nodePriorityQueue;
+    }
+
+    public static LeafNode getLeafNode(List<LeafNode> leafNodes, char letter) {
+        for (LeafNode leafNode : leafNodes) {
+            char letterChar = leafNode.getLetterChar();
+            if (letterChar == letter) {
+                return leafNode;
+            }
+        }
         return null;
     }
 }
@@ -37,12 +60,26 @@ abstract class Node {
     public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
+
+    public void updateFrequency() {
+        this.frequency++;
+    }
 }
 
 class LeafNode extends Node {
 
-    public LeafNode(int frequency) {
-        this.setFrequency(frequency);
+    @Override
+    public String toString() {
+        return "LeafNode{" +
+                "letterChar=" + letterChar +
+                " frequency=" + getFrequency();
+    }
+
+    private char letterChar;
+
+    public LeafNode(char letterChar) {
+        this.letterChar = letterChar;
+        this.setFrequency(1);
     }
 
     @Override
@@ -50,6 +87,14 @@ class LeafNode extends Node {
         ArrayList<LeafNode> leafNodeArrayList = new ArrayList<>();
         leafNodeArrayList.add(this);
         return leafNodeArrayList;
+    }
+
+    public char getLetterChar() {
+        return letterChar;
+    }
+
+    public void setLetterChar(char letterChar) {
+        this.letterChar = letterChar;
     }
 }
 
