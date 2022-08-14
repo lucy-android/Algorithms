@@ -10,7 +10,7 @@ class NewSolution {
             String line = scanner.nextLine();
             PriorityQueue<Node> pq = transformLineToPriorityQueue(line);
             implementingTheAlgorithmLoop(pq);
-            System.out.println(pq);
+            // System.out.println(pq);
         }
 
     }
