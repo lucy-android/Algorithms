@@ -16,6 +16,12 @@ class NewSolution {
     }
 
     private static void implementingTheAlgorithmLoop(PriorityQueue<Node> pq) {
+        if (pq.size() == 1) {
+            Node node = pq.peek();
+            LeafNode lf = (LeafNode) node;
+            lf.huffManCode.append("0");
+            return;
+        }
         while (pq.size() > 1) {
             Node lesserNode = pq.poll();
             Node biggerNode = pq.poll();
