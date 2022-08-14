@@ -9,9 +9,12 @@ public class PriorityCode {
         try (Scanner scanner = new Scanner(System.in)) {
             String line = scanner.nextLine();
             PriorityQueue<FrequencyCharacter> characterPriorityQueue = new PriorityQueue<>(30, new FCharComparator());
+
             List<FrequencyCharacter> characterList = convertStringToFrequencyCharacterList(line);
 
             characterPriorityQueue.addAll(characterList);
+
+            System.out.print(characterPriorityQueue.size() + " ");
 
             ArrayList<FrequencyCharacter> listFrequency = new ArrayList<>();
 
@@ -23,9 +26,21 @@ public class PriorityCode {
                 frequencyCharacter.setHaffmanCode(createHaffmanCode(i, listFrequency.size()));
             }
 
-            System.out.println(listFrequency);
+            System.out.print(calculateTheSizeOfTheObtainedCode(line, listFrequency));
 
         }
+    }
+
+    private static int calculateTheSizeOfTheObtainedCode(String line, ArrayList<FrequencyCharacter> listFrequency) {
+        StringBuilder finalCode = new StringBuilder("");
+        char[] charArray = line.toCharArray();
+        for (char c : charArray) {
+            FrequencyCharacter frequencyCharacter = getFrequencyChar(listFrequency, c);
+            assert frequencyCharacter != null;
+            String haffmanCode = frequencyCharacter.getHaffmanCode();
+            finalCode.append(haffmanCode);
+        }
+        return finalCode.toString().length();
     }
 
     private static String createHaffmanCode(int i, int totalLength) {
