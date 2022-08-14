@@ -7,7 +7,7 @@ public class PriorityCode {
     public static void main(String[] args) {
 
         PriorityQueue<FrequencyCharacter> characterPriorityQueue = new PriorityQueue<>(30, new FCharComparator());
-        List<FrequencyCharacter> characterList = convertStringToFrequencyCharacterList("abacabad");
+        List<FrequencyCharacter> characterList = convertStringToFrequencyCharacterList("a");
 
         characterPriorityQueue.addAll(characterList);
 
@@ -19,9 +19,7 @@ public class PriorityCode {
 
         for (int i = 0; i < listFrequency.size(); i++) {
             FrequencyCharacter frequencyCharacter = listFrequency.get(i);
-            if (i < listFrequency.size() - 1) {
-                frequencyCharacter.setHaffmanCode(createHaffmanCode(i, listFrequency.size()));
-            }
+            frequencyCharacter.setHaffmanCode(createHaffmanCode(i, listFrequency.size()));
         }
 
         System.out.println(listFrequency);
