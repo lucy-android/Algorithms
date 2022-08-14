@@ -11,14 +11,35 @@ public class PriorityCode {
 
         characterPriorityQueue.addAll(characterList);
 
-        LinkedList<FrequencyCharacter> listFrequency = new LinkedList<>();
+        ArrayList<FrequencyCharacter> listFrequency = new ArrayList<>();
 
         while (characterPriorityQueue.size() > 0) {
             listFrequency.add(characterPriorityQueue.poll());
         }
 
+        for (int i = 0; i < listFrequency.size(); i++) {
+            FrequencyCharacter frequencyCharacter = listFrequency.get(i);
+            if (i < listFrequency.size() - 1) {
+                frequencyCharacter.setHaffmanCode(createHaffmanCode(i, listFrequency.size()));
+            }
+        }
+
         System.out.println(listFrequency);
 
+    }
+
+    private static String createHaffmanCode(int i, int totalLength) {
+        StringBuilder stringBuilder = new StringBuilder("");
+        int counter = 0;
+        while (counter < i) {
+            stringBuilder.append("1");
+            counter++;
+        }
+        if (stringBuilder.toString().length() < totalLength - 1) {
+            stringBuilder.append("0");
+        }
+
+        return stringBuilder.toString();
     }
 
     public static List<FrequencyCharacter> convertStringToFrequencyCharacterList(String input) {
