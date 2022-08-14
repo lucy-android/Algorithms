@@ -28,6 +28,9 @@ public class PriorityCode {
 
     private static String createHaffmanCode(int i, int totalLength) {
         StringBuilder stringBuilder = new StringBuilder("");
+        if (i == 0 && totalLength == 1) {
+            return "0";
+        }
         int counter = 0;
         while (counter < i) {
             stringBuilder.append("1");
