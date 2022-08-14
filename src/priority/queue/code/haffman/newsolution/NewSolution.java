@@ -1,7 +1,7 @@
 package priority.queue.code.haffman.newsolution;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -11,19 +11,18 @@ class NewSolution {
 
         try (Scanner scanner = new Scanner(System.in)) {
             String line = scanner.nextLine();
-            PriorityQueue<LeafNode> pq = transformLineToPriorityQueue(line);
+            PriorityQueue<Node> pq = transformLineToPriorityQueue(line);
             System.out.println(pq);
         }
 
     }
 
-    private static PriorityQueue<LeafNode> transformLineToPriorityQueue(String line) {
+    private static PriorityQueue<Node> transformLineToPriorityQueue(String line) {
         return null;
     }
 }
 
-//TODO transform the input line to priority queue where the symbol with the lowest frequency gets the highest priority
-//TODO create class ParentNode и LeafNode with common interface Node
+//TODO create class Comparator to compare LeafNodes
 
 abstract class Node {
 
@@ -72,5 +71,13 @@ class ParentNode extends Node {
         ArrayList<LeafNode> leafNodeArrayList = new ArrayList<>(firstNodeArrayList);
         leafNodeArrayList.addAll(secondNodeArrayList);
         return leafNodeArrayList;
+    }
+}
+
+class NodeComparator implements Comparator<Node> {
+
+    @Override
+    public int compare(Node o1, Node o2) {
+        return Integer.compare(o1.getFrequency(), o2.getFrequency());
     }
 }
