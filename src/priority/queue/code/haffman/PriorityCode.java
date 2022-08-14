@@ -8,28 +8,24 @@ public class PriorityCode {
 
         try (Scanner scanner = new Scanner(System.in)) {
             String line = scanner.nextLine();
-            System.out.println(line + " It's a successful day!");
+            PriorityQueue<FrequencyCharacter> characterPriorityQueue = new PriorityQueue<>(30, new FCharComparator());
+            List<FrequencyCharacter> characterList = convertStringToFrequencyCharacterList(line);
+
+            characterPriorityQueue.addAll(characterList);
+
+            ArrayList<FrequencyCharacter> listFrequency = new ArrayList<>();
+
+            while (characterPriorityQueue.size() > 0) {
+                listFrequency.add(characterPriorityQueue.poll());
+            }
+            for (int i = 0; i < listFrequency.size(); i++) {
+                FrequencyCharacter frequencyCharacter = listFrequency.get(i);
+                frequencyCharacter.setHaffmanCode(createHaffmanCode(i, listFrequency.size()));
+            }
+
+            System.out.println(listFrequency);
+
         }
-
-        /* PriorityQueue<FrequencyCharacter> characterPriorityQueue = new PriorityQueue<>(30, new FCharComparator());
-        List<FrequencyCharacter> characterList = convertStringToFrequencyCharacterList("a");
-
-        characterPriorityQueue.addAll(characterList);
-
-        ArrayList<FrequencyCharacter> listFrequency = new ArrayList<>();
-
-        while (characterPriorityQueue.size() > 0) {
-            listFrequency.add(characterPriorityQueue.poll());
-        }
-
-        for (int i = 0; i < listFrequency.size(); i++) {
-            FrequencyCharacter frequencyCharacter = listFrequency.get(i);
-            frequencyCharacter.setHaffmanCode(createHaffmanCode(i, listFrequency.size()));
-        }
-
-        System.out.println(listFrequency);
-         */
-
     }
 
     private static String createHaffmanCode(int i, int totalLength) {
