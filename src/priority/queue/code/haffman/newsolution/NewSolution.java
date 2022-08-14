@@ -9,9 +9,19 @@ class NewSolution {
         try (Scanner scanner = new Scanner(System.in)) {
             String line = scanner.nextLine();
             PriorityQueue<Node> pq = transformLineToPriorityQueue(line);
+            implementingTheAlgorithmLoop(pq);
             System.out.println(pq);
         }
 
+    }
+
+    private static void implementingTheAlgorithmLoop(PriorityQueue<Node> pq) {
+        while (pq.size() > 1){
+            Node firstNode = pq.poll();
+            Node secondNode = pq.poll();
+            Node newNode = new ParentNode(firstNode, secondNode);
+            pq.add(newNode);
+        }
     }
 
     private static PriorityQueue<Node> transformLineToPriorityQueue(String line) {
@@ -114,6 +124,14 @@ class ParentNode extends Node {
         ArrayList<LeafNode> leafNodeArrayList = new ArrayList<>(firstNodeArrayList);
         leafNodeArrayList.addAll(secondNodeArrayList);
         return leafNodeArrayList;
+    }
+
+    @Override
+    public String toString() {
+        return "ParentNode{" +
+                "letterNode=" + letterNode +
+                ", biggerNode=" + biggerNode +
+                ", frequency " + getFrequency();
     }
 }
 
