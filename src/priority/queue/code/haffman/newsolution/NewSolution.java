@@ -50,6 +50,7 @@ class NewSolution {
             Node lesserNode = pq.poll();
             Node biggerNode = pq.poll();
             lesserNode.updateHuffmanCodeOfAllLeafNodes(true);
+            assert biggerNode != null;
             biggerNode.updateHuffmanCodeOfAllLeafNodes(false);
             Node newNode = new ParentNode(lesserNode, biggerNode);
             pq.add(newNode);
@@ -131,7 +132,7 @@ class LeafNode extends Node {
                 " huffmanCode=" + huffManCode.toString();
     }
 
-    private char letterChar;
+    private final char letterChar;
 
     public LeafNode(char letterChar) {
         this.letterChar = letterChar;
@@ -160,10 +161,6 @@ class LeafNode extends Node {
 
     public char getLetterChar() {
         return letterChar;
-    }
-
-    public void setLetterChar(char letterChar) {
-        this.letterChar = letterChar;
     }
 }
 
