@@ -45,8 +45,6 @@ class NewSolution {
     }
 }
 
-//TODO create class Comparator to compare LeafNodes
-
 abstract class Node {
 
     private int frequency;
@@ -123,6 +121,6 @@ class NodeComparator implements Comparator<Node> {
 
     @Override
     public int compare(Node o1, Node o2) {
-        return Integer.compare(o1.getFrequency(), o2.getFrequency());
+        return -Integer.compare(o2.getFrequency(), o1.getFrequency());
     }
 }
