@@ -26,19 +26,14 @@ public class Main {
             map.put(mapEntry[1], mapEntry[0].toCharArray()[0]);
         }
         String encodedString = stringList.poll();
-        System.out.println("numOfDifferentSymbols: " + numOfDifferentSymbols);
-        System.out.println("sizeOfTheEncodedString: " + sizeOfTheEncodedString);
-        System.out.println("map: " + map);
-        System.out.println("encodedString: " + encodedString);
-        decodeTheString(numOfDifferentSymbols, encodedString, map);
+        System.out.println(decodeTheString(encodedString, map));
 
-
-        writeIntoFile(("C:\\Users\\User\\IdeaProjects\\Algorithms\\src\\priority\\" +
-                        "queue\\decode\\huffman\\code\\output.txt"),
-                "abacabad");
+        writeIntoFile("C:\\Users\\User\\IdeaProjects\\Algorithms\\src\\priority\\" +
+                        "queue\\decode\\huffman\\code\\output.txt",
+                encodedString);
     }
 
-    private static String decodeTheString(int numOfDifferentSymbols, String encodedString, HashMap<String, Character> map) {
+    private static String decodeTheString(String encodedString, HashMap<String, Character> map) {
         char[] charArray = encodedString.toCharArray();
         LinkedList<Character> characterList = new LinkedList<>();
         for (char symbol : charArray) {
@@ -55,10 +50,8 @@ public class Main {
                 codeStringBuilder = new StringBuilder();
             }
         }
-        System.out.println(decodedStringBuilder);
 
-
-        return null;
+        return decodedStringBuilder.toString();
     }
 
     private static String extractStringFromFile(String path) {
