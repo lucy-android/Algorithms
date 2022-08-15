@@ -7,30 +7,40 @@ import java.util.*;
 
 public class Main {
 
+
     public static void main(String[] args) {
-        String extractedString = extractStringFromFile("C:\\Users\\User\\IdeaProjects\\Algorithms" +
-                "\\src\\priority\\queue\\decode\\huffman\\code\\input.txt");
 
-        assert extractedString != null;
-        String[] strings = extractedString.split("\r\n");
-        LinkedList<String> stringList = new LinkedList<>(Arrays.asList(strings));
-        String firstString = stringList.poll();
-        assert firstString != null;
-        String[] firstTwoNums = firstString.split(" ");
-        int numOfDifferentSymbols = Integer.parseInt(firstTwoNums[0]);
-        int sizeOfTheEncodedString = Integer.parseInt(firstTwoNums[1]);
+        StringBuilder firstString = new StringBuilder();
         HashMap<String, Character> map = new HashMap<>();
-        while (stringList.size() > 1) {
-            String stringEntry = stringList.poll();
-            String[] mapEntry = stringEntry.split(" ");
-            map.put(mapEntry[1], mapEntry[0].toCharArray()[0]);
-        }
-        String encodedString = stringList.poll();
-        System.out.println(decodeTheString(encodedString, map));
+        StringBuilder encodedString = new StringBuilder();
 
-        writeIntoFile("C:\\Users\\User\\IdeaProjects\\Algorithms\\src\\priority\\" +
-                        "queue\\decode\\huffman\\code\\output.txt",
-                encodedString);
+        Scanner scanner = new Scanner(System.in);
+        String firstLine = scanner.nextLine();
+        String[] array = firstLine.split(" ");
+        int stringCount = Integer.parseInt(array[0]);
+        int counter = 0;
+        while (counter < stringCount + 1) {
+            String line = scanner.nextLine();
+
+            if (line.length() != 0) {
+                if (counter == 0) {
+                    firstString.append(line);
+                } else if (counter > 0 && counter < stringCount - 1) {
+                    String[] splitArray = line.split(": ");
+                    String key = splitArray[1];
+                    char value = splitArray[0].toCharArray()[0];
+                    map.put(key, value);
+                } else {
+                    encodedString.append(line);
+                }
+            }
+
+            counter++;
+        }
+
+        System.out.println(firstString);
+
+        System.out.println(decodeTheString(encodedString.toString(), map));
     }
 
     private static String decodeTheString(String encodedString, HashMap<String, Character> map) {
