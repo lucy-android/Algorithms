@@ -3,13 +3,32 @@ package priority.queue.decode.huffman.code;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
         String extractedString = extractStringFromFile("C:\\Users\\User\\IdeaProjects\\Algorithms" +
                 "\\src\\priority\\queue\\decode\\huffman\\code\\input.txt");
-        System.out.println(extractedString);
+        char[] generalCharArray = extractedString.toCharArray();
+        LinkedList<Character> characterList = new LinkedList<>();
+        for (char symbol : generalCharArray) {
+            characterList.add(symbol);
+        }
+        Iterator<Character> iterator = characterList.iterator();
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder numOfDifferentStrings = new StringBuilder();
+        while (iterator.hasNext()) {
+            char symbol = iterator.next();
+            if (symbol == ' ') {
+                numOfDifferentStrings.append(stringBuilder);
+                // stringBuilder = new StringBuilder();
+                break;
+            }
+            stringBuilder.append(symbol);
+
+        }
+        System.out.println("numOfDifferentStrings: " + numOfDifferentStrings);
         String resultString = performAlgorithm(extractedString);
         assert resultString != null;
         writeIntoFile(("C:\\Users\\User\\IdeaProjects\\Algorithms\\src\\priority\\" +
