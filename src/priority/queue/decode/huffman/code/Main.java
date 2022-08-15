@@ -8,15 +8,16 @@ public class Main {
 
     public static void main(String[] args) {
         String readString = readFile();
+        assert readString != null;
         writeIntoFile(("C:\\Users\\User\\IdeaProjects\\Algorithms\\src\\priority\\" +
                         "queue\\decode\\huffman\\code\\output.txt"),
-                "You greet me " + readString + " Hello first file");
+                readString);
     }
 
     private static void writeIntoFile(String path, String writtenString) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(path)) {
             byte[] bytes = writtenString.getBytes();
-            for(byte bt: bytes){
+            for (byte bt : bytes) {
                 fileOutputStream.write(bt);
             }
         } catch (IOException e) {
@@ -25,7 +26,6 @@ public class Main {
     }
 
     private static String readFile() {
-
         StringBuilder stringBuilder = new StringBuilder();
 
         try (FileInputStream fis = new FileInputStream("C:\\Users\\User\\IdeaProjects\\Algorithms" +
