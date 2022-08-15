@@ -51,7 +51,7 @@ public class Main {
             codeStringBuilder.append(character);
             Character encodedSymbol = map.get(codeStringBuilder.toString());
             if (encodedSymbol != null) {
-                decodedStringBuilder.append(encodedString);
+                decodedStringBuilder.append(encodedSymbol);
                 codeStringBuilder = new StringBuilder();
             }
         }
