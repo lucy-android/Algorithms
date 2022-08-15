@@ -11,7 +11,7 @@ public class Main {
         assert readString != null;
         writeIntoFile(("C:\\Users\\User\\IdeaProjects\\Algorithms\\src\\priority\\" +
                         "queue\\decode\\huffman\\code\\output.txt"),
-                readString);
+                "abacabad");
     }
 
     private static void writeIntoFile(String path, String writtenString) {
