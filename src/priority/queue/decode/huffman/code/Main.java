@@ -17,7 +17,7 @@ public class Main {
         String firstString = stringList.poll();
         assert firstString != null;
         String[] firstTwoNums = firstString.split(" ");
-        int numOfDifferentStrings = Integer.parseInt(firstTwoNums[0]);
+        int numOfDifferentSymbols = Integer.parseInt(firstTwoNums[0]);
         int sizeOfTheEncodedString = Integer.parseInt(firstTwoNums[1]);
         HashMap<String, Character> map = new HashMap<>();
         while (stringList.size() > 1) {
@@ -26,18 +26,39 @@ public class Main {
             map.put(mapEntry[1], mapEntry[0].toCharArray()[0]);
         }
         String encodedString = stringList.poll();
-        System.out.println("numOfDifferentStrings: " + numOfDifferentStrings);
+        System.out.println("numOfDifferentSymbols: " + numOfDifferentSymbols);
         System.out.println("sizeOfTheEncodedString: " + sizeOfTheEncodedString);
         System.out.println("map: " + map);
         System.out.println("encodedString: " + encodedString);
+        decodeTheString(numOfDifferentSymbols, encodedString, map);
 
 
-
-        String resultString = performAlgorithm(extractedString);
-        assert resultString != null;
         writeIntoFile(("C:\\Users\\User\\IdeaProjects\\Algorithms\\src\\priority\\" +
                         "queue\\decode\\huffman\\code\\output.txt"),
                 "abacabad");
+    }
+
+    private static String decodeTheString(int numOfDifferentSymbols, String encodedString, HashMap<String, Character> map) {
+        char[] charArray = encodedString.toCharArray();
+        LinkedList<Character> characterList = new LinkedList<>();
+        for (char symbol : charArray) {
+            characterList.add(symbol);
+        }
+        StringBuilder decodedStringBuilder = new StringBuilder();
+        StringBuilder codeStringBuilder = new StringBuilder();
+        while (characterList.size() > 0) {
+            char character = characterList.poll();
+            codeStringBuilder.append(character);
+            Character encodedSymbol = map.get(codeStringBuilder.toString());
+            if (encodedSymbol != null) {
+                decodedStringBuilder.append(encodedString);
+                codeStringBuilder = new StringBuilder();
+            }
+        }
+        System.out.println(decodedStringBuilder);
+
+
+        return null;
     }
 
     private static String extractStringFromFile(String path) {
@@ -56,32 +77,14 @@ public class Main {
         return null;
     }
 
-    private static void writeIntoFile(String path, String writtenString) {
+    private static void writeIntoFile(String path, String resultingString) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(path)) {
-            byte[] bytes = writtenString.getBytes();
+            byte[] bytes = resultingString.getBytes();
             for (byte bt : bytes) {
                 fileOutputStream.write(bt);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    private static String performAlgorithm(String extractedString) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        try (FileInputStream fis = new FileInputStream("C:\\Users\\User\\IdeaProjects\\Algorithms" +
-                "\\src\\priority\\queue\\decode\\huffman\\code\\input.txt")) {
-            int content;
-
-            while ((content = fis.read()) != -1) {
-                char castContent = (char) content;
-                stringBuilder.append(castContent);
-            }
-            return stringBuilder.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
         }
     }
 }
