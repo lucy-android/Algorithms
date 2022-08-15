@@ -10,25 +10,29 @@ public class Main {
     public static void main(String[] args) {
         String extractedString = extractStringFromFile("C:\\Users\\User\\IdeaProjects\\Algorithms" +
                 "\\src\\priority\\queue\\decode\\huffman\\code\\input.txt");
-        char[] generalCharArray = extractedString.toCharArray();
-        LinkedList<Character> characterList = new LinkedList<>();
-        for (char symbol : generalCharArray) {
-            characterList.add(symbol);
-        }
-        Iterator<Character> iterator = characterList.iterator();
-        StringBuilder stringBuilder = new StringBuilder();
-        StringBuilder numOfDifferentStrings = new StringBuilder();
-        while (iterator.hasNext()) {
-            char symbol = iterator.next();
-            if (symbol == ' ') {
-                numOfDifferentStrings.append(stringBuilder);
-                // stringBuilder = new StringBuilder();
-                break;
-            }
-            stringBuilder.append(symbol);
 
+        assert extractedString != null;
+        String[] strings = extractedString.split("\r\n");
+        LinkedList<String> stringList = new LinkedList<>(Arrays.asList(strings));
+        String firstString = stringList.poll();
+        assert firstString != null;
+        String[] firstTwoNums = firstString.split(" ");
+        int numOfDifferentStrings = Integer.parseInt(firstTwoNums[0]);
+        int sizeOfTheEncodedString = Integer.parseInt(firstTwoNums[1]);
+        HashMap<String, Character> map = new HashMap<>();
+        while (stringList.size() > 1) {
+            String stringEntry = stringList.poll();
+            String[] mapEntry = stringEntry.split(" ");
+            map.put(mapEntry[1], mapEntry[0].toCharArray()[0]);
         }
+        String encodedString = stringList.poll();
         System.out.println("numOfDifferentStrings: " + numOfDifferentStrings);
+        System.out.println("sizeOfTheEncodedString: " + sizeOfTheEncodedString);
+        System.out.println("map: " + map);
+        System.out.println("encodedString: " + encodedString);
+
+
+
         String resultString = performAlgorithm(extractedString);
         assert resultString != null;
         writeIntoFile(("C:\\Users\\User\\IdeaProjects\\Algorithms\\src\\priority\\" +
