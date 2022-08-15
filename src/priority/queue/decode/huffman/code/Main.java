@@ -22,17 +22,15 @@ public class Main {
         while (counter < stringCount + 1) {
             String line = scanner.nextLine();
 
-            if (line.length() != 0) {
-                if (counter == 0) {
-                    firstString.append(line);
-                } else if (counter > 0 && counter < stringCount - 1) {
+            if (line.length() != 0 && counter < stringCount) {
+                if (counter >= 0) {
                     String[] splitArray = line.split(": ");
                     String key = splitArray[1];
                     char value = splitArray[0].toCharArray()[0];
                     map.put(key, value);
-                } else {
-                    encodedString.append(line);
                 }
+            } else {
+                encodedString.append(line);
             }
 
             counter++;
