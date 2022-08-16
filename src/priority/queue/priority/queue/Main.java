@@ -21,7 +21,6 @@ class Main {
 
 
         PriorityQueue<Integer> integerPriorityQueue = new PriorityQueue<>(new IntegerComparator());
-        //TODO subject new priorityQueue to the operations from the list
 
         while (operationTypeLinkedList.size() > 0) {
             OperationType type = operationTypeLinkedList.poll();
@@ -29,7 +28,7 @@ class Main {
                 int realNumber = ((Insert) type).number;
                 integerPriorityQueue.add(realNumber);
             } else if (type instanceof ExtractMax) {
-                System.out.println(integerPriorityQueue.peek());
+                System.out.println(integerPriorityQueue.poll());
             }
 
         }
@@ -53,7 +52,7 @@ class Main {
 
         @Override
         public int compare(Integer o1, Integer o2) {
-            return Integer.compare(o2, o1);
+            return -Integer.compare(o1, o2);
         }
     }
 }
