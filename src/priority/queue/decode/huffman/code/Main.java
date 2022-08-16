@@ -5,12 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 
-public class Main {
-
-
+class Main {
     public static void main(String[] args) {
 
-        StringBuilder firstString = new StringBuilder();
         HashMap<String, Character> map = new HashMap<>();
         StringBuilder encodedString = new StringBuilder();
 
@@ -36,8 +33,6 @@ public class Main {
             counter++;
         }
 
-        System.out.println(firstString);
-
         System.out.println(decodeTheString(encodedString.toString(), map));
     }
 
@@ -60,32 +55,5 @@ public class Main {
         }
 
         return decodedStringBuilder.toString();
-    }
-
-    private static String extractStringFromFile(String path) {
-        try (FileInputStream fileInputStream = new FileInputStream(path)) {
-            int content;
-            StringBuilder stringBuilder = new StringBuilder();
-
-            while ((content = fileInputStream.read()) != -1) {
-                char castContent = (char) content;
-                stringBuilder.append(castContent);
-            }
-            return stringBuilder.toString();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        return null;
-    }
-
-    private static void writeIntoFile(String path, String resultingString) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(path)) {
-            byte[] bytes = resultingString.getBytes();
-            for (byte bt : bytes) {
-                fileOutputStream.write(bt);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
