@@ -18,7 +18,7 @@ class Main {
 
             if (line.length() != 0 && counter < stringCount) {
                 if (counter >= 0) {
-                    String[] splitArray = line.split(": ");
+                    String[] splitArray = line.split(" ");
                     String key = splitArray[1];
                     char value = splitArray[0].toCharArray()[0];
                     map.put(key, value);
@@ -31,6 +31,8 @@ class Main {
         }
 
         System.out.println(decodeTheString(encodedString.toString(), map));
+
+        scanner.close();
     }
 
     private static String decodeTheString(String encodedString, HashMap<String, Character> map) {
