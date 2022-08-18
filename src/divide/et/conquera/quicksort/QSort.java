@@ -7,8 +7,8 @@ class QSort {
     public static void main(String[] args) {
 
         int[] intArray = new int[]{7, 2, 1, 8, 6, 3, 5, 4};
-        int pivotIndex = selectPivotIndex(intArray, 0, intArray.length - 1);
-        System.out.println(Arrays.toString(partitionArray(intArray, intArray[pivotIndex], 0, 7)));
+
+        System.out.println(Arrays.toString(partitionArray(intArray, 0, 7)));
         /*int pivotIndex = selectPivotIndex(intArray);
         System.out.println(selectPivotIndex(intArray));
         int pivot = intArray[pivotIndex];
@@ -51,13 +51,6 @@ class QSort {
 //        scanner.close();
     }
 
-
-    /**
-     * TODO
-     * в конце обхода i должно соответствовать индексу, который примет опорный элемент минус 1.
-     * j - конец массива.
-     * Начальные значения элементов
-     */
     public static int[] quickSort(int[] initialArray) {
         // разбираем базовый случай
         if (initialArray.length == 0 || initialArray.length == 1) {
@@ -70,7 +63,7 @@ class QSort {
             }
             return initialArray;
         } else {
-            // int pivot = selectPivotIndex(initialArray);
+            // partitionArray(initialArray, )
 
 
         }
@@ -81,15 +74,15 @@ class QSort {
 
     private static int selectPivotIndex(int[] initialArray, int startIndex, int endIndex) {
         int sumOfElements = 0;
-        for (int j = startIndex; j < endIndex; j++) {
+        for (int j = startIndex; j <= endIndex; j++) {
             sumOfElements += initialArray[j];
         }
 
-        int position = -1;
-        int average = sumOfElements / initialArray.length;
+        int position = startIndex - 1;
+        int average = sumOfElements / (endIndex - startIndex + 1);
         int closestToAverage = -1;
 
-        for (int i = 0; i < initialArray.length; i++) {
+        for (int i = startIndex; i <= endIndex; i++) {
             if (Math.abs(average - closestToAverage) > Math.abs(average - initialArray[i])) {
                 closestToAverage = initialArray[i];
                 position = i;
@@ -99,9 +92,11 @@ class QSort {
         return position;
     }
 
-    private static int[] partitionArray(int[] arrayToBePartitioned, int pivot, int startIndex, int endIndex) {
+    private static int[] partitionArray(int[] arrayToBePartitioned, int startIndex, int endIndex) {
         int i = startIndex - 1;
         int j = startIndex;
+        int pivotIndex = selectPivotIndex(arrayToBePartitioned, startIndex, endIndex);
+        int pivot = arrayToBePartitioned[pivotIndex];
 
         while (j <= endIndex) {
             if (arrayToBePartitioned[j] >= pivot) {
@@ -113,6 +108,15 @@ class QSort {
                 arrayToBePartitioned[i] = temp;
             }
             j++;
+        }
+
+        System.out.println("i = " + i);
+        System.out.println("j = " + j);
+
+        for (int m = 0; m < arrayToBePartitioned.length; m++) {
+            if (m < startIndex || m > endIndex) {
+                arrayToBePartitioned[m] = 0;
+            }
         }
 
         return arrayToBePartitioned;
