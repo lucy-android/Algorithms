@@ -1,11 +1,14 @@
 package divide.et.conquera.quicksort;
 
+import java.util.Arrays;
+
 class QSort {
 
     public static void main(String[] args) {
 
         int[] intArray = new int[]{7, 2, 1, 8, 6, 3, 5, 4};
-        int pivotIndex = selectPivotIndex(intArray);
+        System.out.println(Arrays.toString(partitionArray(intArray, 4, 0, 7)));
+        /*int pivotIndex = selectPivotIndex(intArray);
         System.out.println(selectPivotIndex(intArray));
         int pivot = intArray[pivotIndex];
         int i = 0;
@@ -29,7 +32,7 @@ class QSort {
         for (int number : intArray) {
             System.out.print(number + ", ");
         }
-        System.out.print("]");
+        System.out.print("]");*/
 
 //        Scanner scanner = new Scanner(System.in);
 //        int counter = 0;
@@ -92,6 +95,25 @@ class QSort {
         }
 
         return position;
+    }
+
+    private static int[] partitionArray(int[] arrayToBePartitioned, int pivot, int startIndex, int endIndex) {
+        int i = -1;
+        int j = startIndex;
+
+        while (j <= endIndex) {
+            if (arrayToBePartitioned[j] >= pivot) {
+                //do nothing
+            } else {
+                i++;
+                int temp = arrayToBePartitioned[j];
+                arrayToBePartitioned[j] = arrayToBePartitioned[i];
+                arrayToBePartitioned[i] = temp;
+            }
+            j++;
+        }
+
+        return arrayToBePartitioned;
     }
 
 
