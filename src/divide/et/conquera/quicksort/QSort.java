@@ -6,9 +6,9 @@ class QSort {
 
     public static void main(String[] args) {
 
-        int[] intArray = new int[]{7, 2, 1, 8, 6, 3, 5, 3422, 685, 100, 1, 11};
+        int[] intArray = new int[]{7, 2, 1, 8, 6, 3, 5, 3422, 685, 100, 1, 11, 0 ,0 ,0};
 
-        System.out.println(Arrays.toString(partitionArray(intArray, 0, 11)));
+        System.out.println(Arrays.toString(partitionArray(intArray, 0, 14)));
         /*int pivotIndex = selectPivotIndex(intArray);
         System.out.println(selectPivotIndex(intArray));
         int pivot = intArray[pivotIndex];
