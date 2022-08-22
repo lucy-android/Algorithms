@@ -8,10 +8,10 @@ class QSort {
 
         int[] intArray = new int[]{7, 2, 1, 8, 6, 3, 5, 3422, 685, 100, 1, 11, 0, 0, 0};
 
-       // System.out.println(Arrays.toString(partitionArray(intArray, 0, 14)));
+        // System.out.println(Arrays.toString(partitionArray(intArray, 0, 14)));
 
         System.out.println(Arrays.toString(partitionArray(
-                new int[]{9, 3, 5, 10}, 0, 3)));
+                new int[]{9, 3, 5, 10, 4, 4, 44, 4, 8, 1, 4, 6, 2, 4, 5}, 0, 14)));
 
 
 
@@ -132,9 +132,7 @@ class QSort {
         int pivot = arrayToBePartitioned[pivotIndex];
 
         while (j <= endIndex) {
-            if (arrayToBePartitioned[j] > pivot) {
-                //do nothing
-            } else {
+            if (arrayToBePartitioned[j] < pivot){
                 i++;
                 int temp = arrayToBePartitioned[j];
                 arrayToBePartitioned[j] = arrayToBePartitioned[i];
@@ -146,7 +144,11 @@ class QSort {
         System.out.println("i = " + i);
         System.out.println("j = " + j);
 
-        // TODO теперь этот метод
+        /**
+         * i - последний индекс той части массива, что строго меньше
+         * Остальная часть массива больше или равно.
+         *
+         */
 
         return arrayToBePartitioned;
     }
