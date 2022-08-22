@@ -121,8 +121,18 @@ class QSort {
         }
 
 
-        if (arrayToBePartitioned.length == 0 || arrayToBePartitioned.length == 1) {
+        if (endIndex - startIndex == 0) {
             return arrayToBePartitioned;
+        }
+
+        if (endIndex - startIndex == 1) {
+            if (arrayToBePartitioned[startIndex] > arrayToBePartitioned[endIndex]) {
+                int temp = arrayToBePartitioned[startIndex];
+                arrayToBePartitioned[startIndex] = arrayToBePartitioned[endIndex];
+                arrayToBePartitioned[endIndex] = temp;
+            }
+            return arrayToBePartitioned;
+
         }
 
 
@@ -132,7 +142,7 @@ class QSort {
         int pivot = arrayToBePartitioned[pivotIndex];
 
         while (j <= endIndex) {
-            if (arrayToBePartitioned[j] < pivot){
+            if (arrayToBePartitioned[j] < pivot) {
                 i++;
                 int temp = arrayToBePartitioned[j];
                 arrayToBePartitioned[j] = arrayToBePartitioned[i];
