@@ -11,7 +11,12 @@ class QSort {
         // System.out.println(Arrays.toString(partitionArray(intArray, 0, 14)));
 
         System.out.println(selectPivotIndex(
-                new int[]{7, 2, 1, 8}, 0, 3));
+                new int[]{1, 1, 1, 1}, 0, 3));
+
+
+
+
+
         /*int pivotIndex = selectPivotIndex(intArray);
         System.out.println(selectPivotIndex(intArray));
         int pivot = intArray[pivotIndex];
@@ -87,7 +92,7 @@ class QSort {
         } else if (initialArray.length == 1) {
             return 0;
         }
-            int sumOfElements = 0;
+        int sumOfElements = 0;
         for (int j = startIndex; j <= endIndex; j++) {
             sumOfElements += initialArray[j];
         }
@@ -107,6 +112,20 @@ class QSort {
     }
 
     private static int[] partitionArray(int[] arrayToBePartitioned, int startIndex, int endIndex) throws Exception {
+        if (startIndex > endIndex) {
+            throw new Exception("partitionArray error: startIndex>endIndex!");
+        } else if (endIndex > arrayToBePartitioned.length - 1) {
+            throw new Exception("partitionArray error: endIndex> arrayToBePartitioned.length-1!");
+        } else if (startIndex < 0) {
+            throw new Exception("partitionArray error: startIndex < 0!");
+        }
+
+
+        if (arrayToBePartitioned.length == 0 || arrayToBePartitioned.length == 1) {
+            return arrayToBePartitioned;
+        }
+
+
         int i = startIndex - 1;
         int j = startIndex;
         int pivotIndex = selectPivotIndex(arrayToBePartitioned, startIndex, endIndex);
