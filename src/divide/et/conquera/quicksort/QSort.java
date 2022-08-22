@@ -92,16 +92,8 @@ class QSort {
         } else if (initialArray.length == 1) {
             return 0;
         }
-        int sumOfElements = 0;
-        for (int j = startIndex; j <= endIndex; j++) {
-            sumOfElements += initialArray[j];
-        }
 
-        int position = startIndex - 1;
-        int average = sumOfElements / (endIndex - startIndex + 1);
-
-
-        return average;
+        return initialArray[0];
     }
 
     private static int[] partitionArray(int[] arrayToBePartitioned, int startIndex, int endIndex) throws Exception {
