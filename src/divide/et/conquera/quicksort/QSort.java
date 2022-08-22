@@ -99,16 +99,9 @@ class QSort {
 
         int position = startIndex - 1;
         int average = sumOfElements / (endIndex - startIndex + 1);
-        int closestToAverage = -1;
 
-        for (int i = startIndex; i <= endIndex; i++) {
-            if (Math.abs(average - closestToAverage) >= Math.abs(average - initialArray[i])) {
-                closestToAverage = initialArray[i];
-                position = i;
-            }
-        }
 
-        return position;
+        return average;
     }
 
     private static int[] partitionArray(int[] arrayToBePartitioned, int startIndex, int endIndex) throws Exception {
@@ -138,8 +131,7 @@ class QSort {
 
         int i = startIndex - 1;
         int j = startIndex;
-        int pivotIndex = selectPivotIndex(arrayToBePartitioned, startIndex, endIndex);
-        int pivot = arrayToBePartitioned[pivotIndex];
+        int pivot = selectPivotIndex(arrayToBePartitioned, startIndex, endIndex);
 
         while (j <= endIndex) {
             if (arrayToBePartitioned[j] < pivot) {
@@ -160,7 +152,13 @@ class QSort {
          *
          */
 
-        return arrayToBePartitioned;
+
+        int[] firstPartReArrangedArray = partitionArray(arrayToBePartitioned, startIndex, i + 1);
+
+        int[] secondPartReArrangedArray = partitionArray(firstPartReArrangedArray, i + 1, endIndex);
+
+
+        return secondPartReArrangedArray;
     }
 
 
