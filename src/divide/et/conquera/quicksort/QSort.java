@@ -10,10 +10,9 @@ class QSort {
 
         // System.out.println(Arrays.toString(partitionArray(intArray, 0, 14)));
 
-        System.out.println(Arrays.toString(partitionArray(
-                new int[]{9, 3, 5, 10, 4, 4, 44, 4, 8, 1, 4, 6, 2, 4, 5}, 0, 14)));
+        quickSort(intArray, 0, 14);
 
-
+        System.out.print(Arrays.toString(intArray));
 
 
 
@@ -59,98 +58,37 @@ class QSort {
 //        scanner.close();
     }
 
-    public static int[] quickSort(int[] initialArray) {
-        // разбираем базовый случай
-        if (initialArray.length == 0 || initialArray.length == 1) {
-            return initialArray;
-        } else if (initialArray.length == 2) {
-            if (initialArray[0] >= initialArray[1]) {
-                int temp = initialArray[1];
-                initialArray[1] = initialArray[0];
-                initialArray[0] = temp;
-            }
-            return initialArray;
-        } else {
-            // partitionArray(initialArray, )
+    public static void quickSort(int[] initialArray, int startIndex, int endIndex) {
 
-
+        if (startIndex < endIndex) {
+            int pi = partitionArray(initialArray, startIndex, endIndex);
+            quickSort(initialArray, startIndex, pi - 1);
+            quickSort(initialArray, pi + 1, endIndex);
         }
-        return null;
-
-
     }
 
-    private static int selectPivotIndex(int[] initialArray, int startIndex, int endIndex) throws Exception {
-        if (endIndex > initialArray.length || startIndex > initialArray.length) {
-            throw new Exception("Error in the method selectPivotIndex: endIndex > initialArray.length || startIndex > initialArray.length!");
-        } else if (endIndex < startIndex) {
-            throw new Exception("Error in the method selectPivotIndex: endIndex < startIndex!");
-        } else if (startIndex < 0) {
-            throw new Exception("Error in the method selectPivotIndex: startIndex<0!");
-        } else if (endIndex == startIndex) {
-            return initialArray[endIndex];
-        } else if (initialArray.length == 1) {
-            return 0;
-        }
 
-        return initialArray[0];
-    }
-
-    private static int[] partitionArray(int[] arrayToBePartitioned, int startIndex, int endIndex) throws Exception {
-        if (startIndex > endIndex) {
-            throw new Exception("partitionArray error: startIndex>endIndex!");
-        } else if (endIndex > arrayToBePartitioned.length - 1) {
-            throw new Exception("partitionArray error: endIndex> arrayToBePartitioned.length-1!");
-        } else if (startIndex < 0) {
-            throw new Exception("partitionArray error: startIndex < 0!");
-        }
-
-
-        if (endIndex - startIndex == 0) {
-            return arrayToBePartitioned;
-        }
-
-        if (endIndex - startIndex == 1) {
-            if (arrayToBePartitioned[startIndex] > arrayToBePartitioned[endIndex]) {
-                int temp = arrayToBePartitioned[startIndex];
-                arrayToBePartitioned[startIndex] = arrayToBePartitioned[endIndex];
-                arrayToBePartitioned[endIndex] = temp;
-            }
-            return arrayToBePartitioned;
-
-        }
-
+    private static int partitionArray(int[] arrayToBePartitioned, int startIndex, int endIndex) {
+        int pivot = arrayToBePartitioned[endIndex];
 
         int i = startIndex - 1;
-        int j = startIndex;
-        int pivot = selectPivotIndex(arrayToBePartitioned, startIndex, endIndex);
 
-        while (j <= endIndex) {
-            if (arrayToBePartitioned[j] < pivot) {
+        for (int j = startIndex; j < endIndex; j++) {
+            if (arrayToBePartitioned[j] <= pivot) {
                 i++;
-                int temp = arrayToBePartitioned[j];
-                arrayToBePartitioned[j] = arrayToBePartitioned[i];
-                arrayToBePartitioned[i] = temp;
+                int temp = arrayToBePartitioned[i];
+                arrayToBePartitioned[i] = arrayToBePartitioned[j];
+                arrayToBePartitioned[j] = temp;
             }
-            j++;
         }
 
-        System.out.println("i = " + i);
-        System.out.println("j = " + j);
+        //swap arrayToBePartitioned[i+1] and arrayToBePartitioned[endIndex]
 
-        /**
-         * i - последний индекс той части массива, что строго меньше
-         * Остальная часть массива больше или равно.
-         *
-         */
+        int temp = arrayToBePartitioned[i + 1];
+        arrayToBePartitioned[i + 1] = arrayToBePartitioned[endIndex];
+        arrayToBePartitioned[endIndex] = temp;
 
-
-        int[] firstPartReArrangedArray = partitionArray(arrayToBePartitioned, startIndex, i + 1);
-
-        int[] secondPartReArrangedArray = partitionArray(firstPartReArrangedArray, i + 1, endIndex);
-
-
-        return secondPartReArrangedArray;
+        return i + 1;
     }
 
 
