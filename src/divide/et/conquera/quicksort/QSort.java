@@ -24,9 +24,15 @@ class QSort {
         hashMap.put(2, new LineSegmentEndComparable("4 10"));
         hashMap.put(3, new LineSegmentEndComparable("4 26"));
 
-        quickSort(hashMap, 0, 3);
+        LineSegmentEndComparable temp = hashMap.get(1);
+        hashMap.put(1, hashMap.get(0));
+        hashMap.put(0, temp);
 
-        System.out.print(hashMap);
+        System.out.println(hashMap);
+
+/*        quickSort(hashMap, 0, 3);
+
+        System.out.print(hashMap);*/
 
 
 
