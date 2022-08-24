@@ -26,17 +26,17 @@ class QSort {
         String line = scanner.nextLine();
         String[] numbers = line.split(" ");
         HashMap<Integer, LineSegmentStartComparable> lineSegmentHashMap = new HashMap<>();
-        while (counter < Integer.parseInt(numbers[1])) {
+        while (counter < 1 + Integer.parseInt(numbers[0])) {
 
 
 
             String newLine = scanner.nextLine();
             LineSegmentStartComparable lineSegment = new LineSegmentStartComparable(newLine);
             if (!newLine.equals("")) {
-                counter++;
-                if(counter < Integer.parseInt(numbers[1])){
-                    lineSegmentHashMap.put(counter - 1, lineSegment);
+                if(counter < Integer.parseInt(numbers[0])){
+                    lineSegmentHashMap.put(counter, lineSegment);
                 }
+                counter++;
             }
 
         }
