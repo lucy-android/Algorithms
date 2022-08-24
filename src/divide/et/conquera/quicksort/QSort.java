@@ -132,7 +132,8 @@ class QSort {
         int i = startIndex - 1;
 
         for (int j = startIndex; j < endIndex; j++) {
-            if (arrayToBePartitioned.get(j).number2 <= pivot.number2) {
+            LineSegmentEndComparable end = arrayToBePartitioned.get(j);
+            if (end.compareTo(pivot) <= 0) {
                 i++;
                 LineSegmentEndComparable temp = arrayToBePartitioned.get(i);
                 arrayToBePartitioned.put(i, arrayToBePartitioned.get(j));
