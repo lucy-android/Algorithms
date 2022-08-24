@@ -15,7 +15,7 @@ class QSort {
 
         quickSort(intArray, 0, 14);
 
-        // System.out.print(Arrays.toString(intArray));
+        System.out.print(Arrays.toString(intArray));
 
         HashMap<Integer, LineSegmentEndComparable> hashMap = new HashMap<>();
 
@@ -23,11 +23,15 @@ class QSort {
         hashMap.put(1, new LineSegmentEndComparable("4 6"));
         hashMap.put(2, new LineSegmentEndComparable("4 10"));
         hashMap.put(3, new LineSegmentEndComparable("4 26"));
+        hashMap.put(4, new LineSegmentEndComparable("4 23"));
 
-        LineSegmentEndComparable temp = hashMap.get(1);
+/*        LineSegmentEndComparable temp = hashMap.get(1);
         hashMap.put(1, hashMap.get(0));
         hashMap.put(0, temp);
 
+        System.out.println(hashMap);*/
+
+        quickSort(hashMap, 0, 4);
         System.out.println(hashMap);
 
 /*        quickSort(hashMap, 0, 3);
@@ -111,7 +115,41 @@ class QSort {
         return i + 1;
     }
 
-    private static <T extends Comparable<T>> int partitionArray(HashMap<Integer, T> arrayToBePartitioned, int startIndex, int endIndex) {
+
+    public static void quickSort(HashMap<Integer, LineSegmentEndComparable> initialArray, int startIndex, int endIndex) {
+
+        if (startIndex < endIndex) {
+            int pi = partitionArray(initialArray, startIndex, endIndex);
+            quickSort(initialArray, startIndex, pi - 1);
+            quickSort(initialArray, pi + 1, endIndex);
+        }
+    }
+
+
+    private static int partitionArray(HashMap<Integer, LineSegmentEndComparable> arrayToBePartitioned, int startIndex, int endIndex) {
+        LineSegmentEndComparable pivot = arrayToBePartitioned.get(endIndex);
+
+        int i = startIndex - 1;
+
+        for (int j = startIndex; j < endIndex; j++) {
+            if (arrayToBePartitioned.get(j).number2 <= pivot.number2) {
+                i++;
+                LineSegmentEndComparable temp = arrayToBePartitioned.get(i);
+                arrayToBePartitioned.put(i, arrayToBePartitioned.get(j));
+                arrayToBePartitioned.put(j, temp);
+            }
+        }
+
+        //swap arrayToBePartitioned[i+1] and arrayToBePartitioned[endIndex]
+
+        LineSegmentEndComparable temp = arrayToBePartitioned.get(i + 1);
+        arrayToBePartitioned.put(i + 1, arrayToBePartitioned.get(endIndex));
+        arrayToBePartitioned.put(endIndex, temp);
+
+        return i + 1;
+    }
+
+    /* private static <T extends Comparable<T>> int partitionArray(HashMap<Integer, T> arrayToBePartitioned, int startIndex, int endIndex) {
         T pivot = arrayToBePartitioned.get(0);
 
         int i = startIndex - 1;
@@ -141,7 +179,7 @@ class QSort {
             quickSort(arrayToBePartitioned, startIndex, pi - 1);
             quickSort(arrayToBePartitioned, pi + 1, endIndex);
         }
-    }
+    } */
 
 
 }
