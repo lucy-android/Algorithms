@@ -9,13 +9,13 @@ class QSort {
 
     public static void main(String[] args) throws Exception {
 
-        int[] intArray = new int[]{7, 2, 1, 8, 6, 3, 5, 3422, 685, 100, 1, 11, 0, 0, 0};
+/*        int[] intArray = new int[]{7, 2, 1, 8, 6, 3, 5, 3422, 685, 100, 1, 11, 0, 0, 0};
 
         // System.out.println(Arrays.toString(partitionArray(intArray, 0, 14)));
 
         quickSort(intArray, 0, 14);
 
-        System.out.print(Arrays.toString(intArray));
+        System.out.print(Arrays.toString(intArray));*/
 
         HashMap<Integer, LineSegmentEndComparable> hashMap = new HashMap<>();
 
