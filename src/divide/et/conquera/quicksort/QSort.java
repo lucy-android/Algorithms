@@ -25,15 +25,24 @@ class QSort {
         int counter = 0;
         String line = scanner.nextLine();
         String[] numbers = line.split(" ");
+        HashMap<Integer, LineSegmentStartComparable> lineSegmentHashMap = new HashMap<>();
         while (counter < Integer.parseInt(numbers[1])) {
+
+
+
             String newLine = scanner.nextLine();
+            LineSegmentStartComparable lineSegment = new LineSegmentStartComparable(newLine);
             if (!newLine.equals("")) {
                 counter++;
+                if(counter < Integer.parseInt(numbers[1])){
+                    lineSegmentHashMap.put(counter - 1, lineSegment);
+                }
             }
 
         }
 
         System.out.println("1 0 0");
+        System.out.println(lineSegmentHashMap);
         scanner.close();
     }
 
