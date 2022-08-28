@@ -41,7 +41,11 @@ class QSort {
                     resultArray[k] = n - m;
                 }
                 System.out.println(Arrays.toString(intPointArray));
-                System.out.println(Arrays.toString(resultArray));
+                String[] stringResultArray = new String[resultArray.length];
+                for(int x = 0; x< resultArray.length; x++){
+                    stringResultArray[x] = String.valueOf(resultArray[x]);
+                }
+                System.out.println(String.join(" ", stringResultArray));
             }
         }
         int length = lineSegmentStartPoints.length - 1;
