@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Scanner;
 
-class QSort {
+/** class QSort {
 
     public static void main(String[] args) {
 
@@ -27,9 +27,6 @@ class QSort {
         String[] numbers = line.split(" ");
         HashMap<Integer, LineSegmentStartComparable> lineSegmentHashMap = new HashMap<>();
         while (counter < 1 + Integer.parseInt(numbers[0])) {
-
-
-
             String newLine = scanner.nextLine();
             LineSegmentStartComparable lineSegment = new LineSegmentStartComparable(newLine);
             if (!newLine.equals("")) {
@@ -141,4 +138,4 @@ class LineSegmentEndComparable extends LineSegmentBase implements Comparable<Lin
     public String toString() {
         return number1 + " " + number2;
     }
-}
+} */
