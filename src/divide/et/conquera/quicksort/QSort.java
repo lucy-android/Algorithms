@@ -60,6 +60,7 @@ class QSort {
             quickSort(initialArray, startIndex, pi - 1);
             quickSort(initialArray, pi + 1, endIndex);
         }
+
     }
 
     public static int countAllNotGreaterElementsInAnArray(int[] initialArray, int point) {
@@ -68,6 +69,9 @@ class QSort {
         for (int number : initialArray) {
             if (point > number) {
                 counter++;
+            }
+            else {
+                break;
             }
 
         }
@@ -80,6 +84,9 @@ class QSort {
         for (int number : initialArray) {
             if (point >= number) {
                 counter++;
+            }
+            else {
+                break;
             }
 
         }
