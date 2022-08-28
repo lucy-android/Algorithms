@@ -1,9 +1,53 @@
 package divide.et.conquera.quicksort;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.Arrays;
 
-import java.util.HashMap;
-import java.util.Scanner;
+class QSort {
+
+    public static void main(String[] args) throws Exception {
+
+        int[] intArray = new int[]{7, 2, 1, 8, 6, 3, 5, 3422, 685, 100, 1, 11, 0, 0, 0};
+
+        quickSort(intArray, 0, 14);
+
+        System.out.print(Arrays.toString(intArray));
+    }
+
+    public static void quickSort(int[] initialArray, int startIndex, int endIndex) {
+
+        if (startIndex < endIndex) {
+            int pi = partitionArray(initialArray, startIndex, endIndex);
+            quickSort(initialArray, startIndex, pi - 1);
+            quickSort(initialArray, pi + 1, endIndex);
+        }
+    }
+
+
+    private static int partitionArray(int[] arrayToBePartitioned, int startIndex, int endIndex) {
+        int pivot = arrayToBePartitioned[endIndex];
+
+        int i = startIndex - 1;
+
+        for (int j = startIndex; j < endIndex; j++) {
+            if (arrayToBePartitioned[j] <= pivot) {
+                i++;
+                int temp = arrayToBePartitioned[i];
+                arrayToBePartitioned[i] = arrayToBePartitioned[j];
+                arrayToBePartitioned[j] = temp;
+            }
+        }
+
+        int temp = arrayToBePartitioned[i + 1];
+        arrayToBePartitioned[i + 1] = arrayToBePartitioned[endIndex];
+        arrayToBePartitioned[endIndex] = temp;
+
+        return i + 1;
+    }
+
+
+}
+
+
 
 /** class QSort {
 
