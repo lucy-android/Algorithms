@@ -1,13 +1,12 @@
 package divide.et.conquera.quicksort;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 class QSort {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.println(countAllNotGreaterElementsInAnArray(new int[]{1, 3, 7, 11, 14, 16, 34}, 12));
+
+        /*Scanner scanner = new Scanner(System.in);
         int counter = 0;
         String line = scanner.nextLine();
         String[] numbers = line.split(" ");
@@ -37,7 +36,7 @@ class QSort {
 
         System.out.println("1 0 0");
         //TODO
-        scanner.close();
+        scanner.close();*/
     }
 
     public static void quickSort(int[] initialArray, int startIndex, int endIndex) {
@@ -47,6 +46,15 @@ class QSort {
             quickSort(initialArray, startIndex, pi - 1);
             quickSort(initialArray, pi + 1, endIndex);
         }
+    }
+
+    //TODO 1-я будет искать в массиве Х все элементы, которые меньше или равны(!) А и возвращать их количество N
+    public static int countAllNotGreaterElementsInAnArray(int[] initialArray, int point) {
+        int counter = 0;
+        while (point > initialArray[counter]) {
+            counter++;
+        }
+        return counter;
     }
 
 
