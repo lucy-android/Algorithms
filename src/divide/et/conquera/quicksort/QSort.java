@@ -36,8 +36,9 @@ class QSort {
                     intPointArray[i] = Integer.parseInt(pointStringArray[i]);
                 }
                 for (int k = 0; k < pointStringArray.length; k++) {
-                    int result = countAllNotGreaterElementsInAnArray(lineSegmentStartPoints, intPointArray[k]);
-                    resultArray[k] = result;
+                    int n = countAllNotGreaterElementsInAnArray(lineSegmentStartPoints, intPointArray[k]);
+                    int m = countAllSmallerElementsInAnArray(lineSegmentEndPoints, intPointArray[k]);
+                    resultArray[k] = n - m;
                 }
                 System.out.println(Arrays.toString(intPointArray));
                 System.out.println(Arrays.toString(resultArray));
@@ -76,8 +77,16 @@ class QSort {
         return counter;
     }
 
-    public static int countAllGreaterElementsInAnArray(int[] initialArray, int point) {
-        return initialArray.length - countAllNotGreaterElementsInAnArray(initialArray, point);
+    public static int countAllSmallerElementsInAnArray(int[] initialArray, int point) {
+        int counter = 0;
+
+        for (int number : initialArray) {
+            if (point >= number) {
+                counter++;
+            }
+
+        }
+        return counter;
     }
 
 
