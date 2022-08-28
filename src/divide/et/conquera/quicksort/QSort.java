@@ -7,8 +7,6 @@ class QSort {
 
     public static void main(String[] args) {
 
-        // System.out.println(countAllGreaterElementsInAnArray(new int[]{1, 3, 7, 11, 14, 16, 34}, 12));
-
         Scanner scanner = new Scanner(System.in);
         int counter = 0;
         String line = scanner.nextLine();
@@ -25,7 +23,6 @@ class QSort {
                     int secondNumber = Integer.parseInt(lineSegment[1]);
                     lineSegmentStartPoints[counter] = firstNumber;
                     lineSegmentEndPoints[counter] = secondNumber;
-                    //TODO
                 }
                 counter++;
             }
