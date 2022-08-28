@@ -7,12 +7,6 @@ class QSort {
 
     public static void main(String[] args) {
 
-/*        int[] intArray = new int[]{7, 2, 1, 8, 6, 3, 5, 3422, 685, 100, 1, 11, 0, 0, 0};
-
-        quickSort(intArray, 0, 14);
-
-        System.out.print(Arrays.toString(intArray));*/
-
         Scanner scanner = new Scanner(System.in);
         int counter = 0;
         String line = scanner.nextLine();
@@ -20,7 +14,7 @@ class QSort {
         int lineSegmentNumber = Integer.parseInt(numbers[0]);
         int[] lineSegmentStartPoints = new int[lineSegmentNumber];
         int[] lineSegmentEndPoints = new int[lineSegmentNumber];
-        while (counter < 1 + Integer.parseInt(numbers[0])) {
+        while (counter < 1 + lineSegmentNumber) {
             String newLine = scanner.nextLine();
             if (!newLine.equals("")) {
                 if (counter < lineSegmentNumber) {
@@ -35,6 +29,9 @@ class QSort {
             }
 
         }
+        int length = lineSegmentStartPoints.length - 1;
+        quickSort(lineSegmentStartPoints, 0, length);
+        quickSort(lineSegmentEndPoints, 0, length);
         System.out.println(Arrays.toString(lineSegmentStartPoints));
         System.out.println(Arrays.toString(lineSegmentEndPoints));
 
