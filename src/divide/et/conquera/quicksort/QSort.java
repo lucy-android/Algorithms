@@ -4,7 +4,7 @@ class QSort {
 
     public static void main(String[] args) {
 
-        System.out.println(countAllNotGreaterElementsInAnArray(new int[]{1, 3, 7, 11, 14, 16, 34}, 12));
+        System.out.println(countAllGreaterElementsInAnArray(new int[]{1, 3, 7, 11, 14, 16, 34}, 12));
 
         /*Scanner scanner = new Scanner(System.in);
         int counter = 0;
@@ -48,13 +48,16 @@ class QSort {
         }
     }
 
-    //TODO 1-я будет искать в массиве Х все элементы, которые меньше или равны(!) А и возвращать их количество N
     public static int countAllNotGreaterElementsInAnArray(int[] initialArray, int point) {
         int counter = 0;
         while (point > initialArray[counter]) {
             counter++;
         }
         return counter;
+    }
+
+    public static int countAllGreaterElementsInAnArray(int[] initialArray, int point) {
+        return initialArray.length - countAllNotGreaterElementsInAnArray(initialArray, point);
     }
 
 
