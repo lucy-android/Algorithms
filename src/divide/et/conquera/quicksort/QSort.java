@@ -56,7 +56,8 @@ class QSort {
     public static void quickSort(int[] initialArray, int startIndex, int endIndex) {
 
         if (startIndex < endIndex) {
-            int pi = partitionArray(initialArray, startIndex, endIndex);
+            int pivot = selectPivot(initialArray, startIndex, endIndex);
+            int pi = partitionArray(pivot, initialArray, startIndex, endIndex);
             quickSort(initialArray, startIndex, pi - 1);
             quickSort(initialArray, pi + 1, endIndex);
         }
@@ -69,8 +70,7 @@ class QSort {
         for (int number : initialArray) {
             if (point > number) {
                 counter++;
-            }
-            else {
+            } else {
                 break;
             }
 
@@ -84,8 +84,7 @@ class QSort {
         for (int number : initialArray) {
             if (point >= number) {
                 counter++;
-            }
-            else {
+            } else {
                 break;
             }
 
@@ -94,8 +93,37 @@ class QSort {
     }
 
 
-    private static int partitionArray(int[] arrayToBePartitioned, int startIndex, int endIndex) {
-        int pivot = arrayToBePartitioned[endIndex];
+    private static int selectPivot(int[] initialArray, int startIndex, int endIndex) {
+        if (startIndex < 0 || endIndex > initialArray.length || endIndex < startIndex) {
+            return -1;
+        }
+        if (endIndex == startIndex) {
+            return initialArray[endIndex];
+        } else if (initialArray.length == 1) {
+            return initialArray[0];
+        }
+
+        int sumOfElements = 0;
+        for (int j = startIndex; j <= endIndex; j++) {
+            sumOfElements += initialArray[j];
+        }
+
+        int position = startIndex;
+        int average = sumOfElements / (endIndex - startIndex + 1);
+        int closestToAverage = -1;
+
+        for (int i = startIndex; i <= endIndex; i++) {
+            if (Math.abs(average - closestToAverage) >= Math.abs(average - initialArray[i])) {
+                closestToAverage = initialArray[i];
+                position = i;
+            }
+        }
+
+        return initialArray[position];
+    }
+
+
+    private static int partitionArray(int pivot, int[] arrayToBePartitioned, int startIndex, int endIndex) {
 
         int i = startIndex - 1;
 
@@ -114,6 +142,4 @@ class QSort {
 
         return i + 1;
     }
-
-
 }
