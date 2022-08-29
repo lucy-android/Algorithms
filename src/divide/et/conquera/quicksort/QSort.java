@@ -34,6 +34,11 @@ class QSort {
                 for (int i = 0; i < pointStringArray.length; i++) {
                     intPointArray[i] = Integer.parseInt(pointStringArray[i]);
                 }
+
+                int length = lineSegmentStartPoints.length - 1;
+                quickSort(lineSegmentStartPoints, 0, length);
+                quickSort(lineSegmentEndPoints, 0, length);
+
                 for (int k = 0; k < pointStringArray.length; k++) {
                     int n = countAllNotGreaterElementsInAnArray(lineSegmentStartPoints, intPointArray[k]);
                     int m = countAllSmallerElementsInAnArray(lineSegmentEndPoints, intPointArray[k]);
@@ -46,9 +51,6 @@ class QSort {
                 System.out.println(String.join(" ", stringResultArray));
             }
         }
-        int length = lineSegmentStartPoints.length - 1;
-        quickSort(lineSegmentStartPoints, 0, length);
-        quickSort(lineSegmentEndPoints, 0, length);
 
         scanner.close();
     }
