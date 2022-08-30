@@ -6,9 +6,7 @@ class QSort {
 
     public static void main(String[] args) {
 
-        System.out.println(binaryNotGreaterElementsSearch(788, new int[]{-2, -1, 4, 6, 13, 16, 17, 18, 423, 500, 600, 585865}, 0, 11));
-
-        /*Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         int counter = 0;
         String line = scanner.nextLine();
         String[] numbers = line.split(" ");
@@ -36,14 +34,9 @@ class QSort {
                 for (int i = 0; i < pointStringArray.length; i++) {
                     intPointArray[i] = Integer.parseInt(pointStringArray[i]);
                 }
-
-                int length = lineSegmentStartPoints.length - 1;
-                quickSort(lineSegmentStartPoints, 0, length);
-                quickSort(lineSegmentEndPoints, 0, length);
-
                 for (int k = 0; k < pointStringArray.length; k++) {
-                    int n = countAllNotGreaterElementsInAnArray(lineSegmentStartPoints, intPointArray[k]);
-                    int m = countAllSmallerElementsInAnArray(lineSegmentEndPoints, intPointArray[k]);
+                    int n = binaryNotGreaterElementsSearch(intPointArray[k], lineSegmentStartPoints, 0, lineSegmentStartPoints.length - 1);
+                    int m = binarySmallerElementsSearch(lineSegmentEndPoints, intPointArray[k], 0, lineSegmentStartPoints.length - 1);
                     resultArray[k] = n - m;
                 }
                 String[] stringResultArray = new String[resultArray.length];
@@ -53,34 +46,22 @@ class QSort {
                 System.out.println(String.join(" ", stringResultArray));
             }
         }
+        int length = lineSegmentStartPoints.length - 1;
+        quickSort(lineSegmentStartPoints, 0, length);
+        quickSort(lineSegmentEndPoints, 0, length);
 
-        scanner.close();*/
+        scanner.close();
     }
 
     public static void quickSort(int[] initialArray, int startIndex, int endIndex) {
 
         if (startIndex < endIndex) {
-            int pivot = selectPivot(initialArray, startIndex, endIndex);
-            int pi = partitionArray(pivot, initialArray, startIndex, endIndex);
+            int pi = partitionArray(initialArray, startIndex, endIndex);
             quickSort(initialArray, startIndex, pi - 1);
             quickSort(initialArray, pi + 1, endIndex);
         }
-
     }
 
-    public static int countAllNotGreaterElementsInAnArray(int[] initialArray, int point) {
-        int counter = 0;
-
-        /* for (int number : initialArray) {
-            if (point > number) {
-                counter++;
-            } else {
-                break;
-            }
-
-        } */
-        return counter;
-    }
 
     private static int binaryNotGreaterElementsSearch(int searchedNumber, int[] sortedArray, int startIndex, int endIndex) {
         if (startIndex > endIndex) {
@@ -109,52 +90,34 @@ class QSort {
         }
     }
 
-    public static int countAllSmallerElementsInAnArray(int[] initialArray, int point) {
-        int counter = 0;
-
-        for (int number : initialArray) {
-            if (point >= number) {
-                counter++;
-            } else {
-                break;
-            }
-
-        }
-        return counter;
-    }
-
-
-    private static int selectPivot(int[] initialArray, int startIndex, int endIndex) {
-        if (startIndex < 0 || endIndex > initialArray.length || endIndex < startIndex) {
+    public static int binarySmallerElementsSearch(int[] sortedArray, int searchedNumber, int startIndex, int endIndex) {
+        if (startIndex > endIndex) {
             return -1;
         }
-        if (endIndex == startIndex) {
-            return initialArray[endIndex];
-        } else if (initialArray.length == 1) {
-            return initialArray[0];
+
+        if (searchedNumber > sortedArray[endIndex]) {
+            return endIndex;
         }
-
-        int sumOfElements = 0;
-        for (int j = startIndex; j <= endIndex; j++) {
-            sumOfElements += initialArray[j];
+        if (searchedNumber < sortedArray[startIndex]) {
+            return -1;
         }
-
-        int position = startIndex;
-        int average = sumOfElements / (endIndex - startIndex + 1);
-        int closestToAverage = -1;
-
-        for (int i = startIndex; i <= endIndex; i++) {
-            if (Math.abs(average - closestToAverage) >= Math.abs(average - initialArray[i])) {
-                closestToAverage = initialArray[i];
-                position = i;
+        if (startIndex + 1 == endIndex) {
+            if (searchedNumber > sortedArray[endIndex]) {
+                return endIndex;
             }
+            return startIndex;
         }
-
-        return initialArray[position];
+        int middleIndex = startIndex + (endIndex - startIndex) / 2;
+        if (sortedArray[middleIndex] <= searchedNumber) {
+            return binaryNotGreaterElementsSearch(searchedNumber, sortedArray, middleIndex, endIndex);
+        } else {
+            return binaryNotGreaterElementsSearch(searchedNumber, sortedArray, startIndex, middleIndex);
+        }
     }
 
 
-    private static int partitionArray(int pivot, int[] arrayToBePartitioned, int startIndex, int endIndex) {
+    private static int partitionArray(int[] arrayToBePartitioned, int startIndex, int endIndex) {
+        int pivot = arrayToBePartitioned[endIndex];
 
         int i = startIndex - 1;
 
