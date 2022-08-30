@@ -34,9 +34,13 @@ class QSort {
                 for (int i = 0; i < pointStringArray.length; i++) {
                     intPointArray[i] = Integer.parseInt(pointStringArray[i]);
                 }
+
+                int length = lineSegmentStartPoints.length - 1;
+                quickSort(lineSegmentStartPoints, 0, length);
+                quickSort(lineSegmentEndPoints, 0, length);
                 for (int k = 0; k < pointStringArray.length; k++) {
-                    int n = binaryNotGreaterElementsSearch(intPointArray[k], lineSegmentStartPoints, 0, lineSegmentStartPoints.length - 1);
-                    int m = binarySmallerElementsSearch(lineSegmentEndPoints, intPointArray[k], 0, lineSegmentStartPoints.length - 1);
+                    int n = binaryNotGreaterElementsSearch(intPointArray[k], lineSegmentStartPoints, 0, length);
+                    int m = binarySmallerElementsSearch(lineSegmentEndPoints, intPointArray[k], 0, length);
                     resultArray[k] = n - m;
                 }
                 String[] stringResultArray = new String[resultArray.length];
@@ -46,9 +50,7 @@ class QSort {
                 System.out.println(String.join(" ", stringResultArray));
             }
         }
-        int length = lineSegmentStartPoints.length - 1;
-        quickSort(lineSegmentStartPoints, 0, length);
-        quickSort(lineSegmentEndPoints, 0, length);
+
 
         scanner.close();
     }
