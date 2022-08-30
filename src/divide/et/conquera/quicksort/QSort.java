@@ -6,7 +6,9 @@ class QSort {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.println(binaryNotGreaterElementsSearch(788, new int[]{-2, -1, 4, 6, 13, 16, 17, 18, 423, 500, 600, 585865}, 0, 11));
+
+        /*Scanner scanner = new Scanner(System.in);
         int counter = 0;
         String line = scanner.nextLine();
         String[] numbers = line.split(" ");
@@ -52,7 +54,7 @@ class QSort {
             }
         }
 
-        scanner.close();
+        scanner.close();*/
     }
 
     public static void quickSort(int[] initialArray, int startIndex, int endIndex) {
@@ -69,15 +71,42 @@ class QSort {
     public static int countAllNotGreaterElementsInAnArray(int[] initialArray, int point) {
         int counter = 0;
 
-        for (int number : initialArray) {
+        /* for (int number : initialArray) {
             if (point > number) {
                 counter++;
             } else {
                 break;
             }
 
-        }
+        } */
         return counter;
+    }
+
+    private static int binaryNotGreaterElementsSearch(int searchedNumber, int[] sortedArray, int startIndex, int endIndex) {
+        if (startIndex > endIndex) {
+            return -1;
+        }
+
+        if (searchedNumber >= sortedArray[endIndex]) {
+            return endIndex;
+        }
+        if (searchedNumber < sortedArray[startIndex]) {
+            return -1;
+        }
+        if (startIndex + 1 == endIndex) {
+            if (searchedNumber >= sortedArray[endIndex]) {
+                return endIndex;
+            }
+            return startIndex;
+        }
+        int middleIndex = startIndex + (endIndex - startIndex) / 2;
+        if (sortedArray[middleIndex] == searchedNumber) {
+            return middleIndex;
+        } else if (sortedArray[middleIndex] < searchedNumber) {
+            return binaryNotGreaterElementsSearch(searchedNumber, sortedArray, middleIndex, endIndex);
+        } else {
+            return binaryNotGreaterElementsSearch(searchedNumber, sortedArray, startIndex, middleIndex - 1);
+        }
     }
 
     public static int countAllSmallerElementsInAnArray(int[] initialArray, int point) {
