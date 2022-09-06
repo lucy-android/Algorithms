@@ -107,39 +107,3 @@ class PointComparator implements Comparator<Point> {
         return Integer.compare(o2.getSubsequenceIndices().size(), o1.getSubsequenceIndices().size());
     }
 }
-
-/*
-else if (i == 1) {
-        Integer lastElement = pointPriorityQueue.peek().getLastSubsequenceElement();
-        if (lastElement >= numbers[i]) {
-        LinkedList<Integer> list = pointPriorityQueue.peek().getSubsequence();
-        LinkedList<Integer> linkedList = (LinkedList<Integer>) list.clone();
-
-        linkedList.add(numbers[i]);
-        Point point = new Point(numbers[i], i, linkedList);
-        pointPriorityQueue.add(point);
-        } else {
-        LinkedList<Integer> linkedList = new LinkedList<>();
-        linkedList.add(numbers[i]);
-        Point point = new Point(numbers[i], i, linkedList);
-        pointPriorityQueue.add(point);
-        }
-        } else {
-        PriorityQueue<Point> mutableQueue = new PriorityQueue<>(pointPriorityQueue);
-        while (mutableQueue.size() > 1 && mutableQueue.peek().getLastSubsequenceElement() < numbers[i]) {
-        mutableQueue.poll();
-        }
-        Integer lastElement = mutableQueue.peek().getLastSubsequenceElement();
-        if (lastElement >= numbers[i]) {
-        LinkedList<Integer> list = mutableQueue.poll().getSubsequence();
-        list.add(numbers[i]);
-        Point point = new Point(numbers[i], i, list);
-        pointPriorityQueue.add(point);
-        } else {
-        LinkedList<Integer> linkedList = new LinkedList<>();
-        linkedList.add(numbers[i]);
-        Point point = new Point(numbers[i], i, linkedList);
-        pointPriorityQueue.add(point);
-        }
-
-        }*/
