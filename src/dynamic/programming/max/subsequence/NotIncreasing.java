@@ -19,7 +19,13 @@ class NotIncreasing {
 
             PriorityQueue<Point> queue = createPriorityQueue(numbers);
             Point point = queue.poll();
-            System.out.println(point.getSubsequence());
+            List<Integer> list = point.getSubsequenceIndices();
+            List<String> stringList = new ArrayList<>(list.size());
+            for (int integer : list) {
+                stringList.add(String.valueOf(integer));
+            }
+            System.out.println(list.size());
+            System.out.println(String.join(" ", stringList));
 
 
         } catch (IOException e) {
@@ -32,24 +38,24 @@ class NotIncreasing {
         for (int i = 0; i < numbers.length; i++) {
             if (i == 0) {
                 LinkedList<Integer> linkedList = new LinkedList<>();
-                linkedList.add(numbers[i]);
+                linkedList.add(i + 1);
                 Point point = new Point(numbers[i], i, linkedList);
                 pointPriorityQueue.add(point);
             } else {
                 PriorityQueue<Point> mutableQueue = new PriorityQueue<>(pointPriorityQueue);
-                while (mutableQueue.size() > 1 && mutableQueue.peek().getLastSubsequenceElement() < numbers[i]) {
+                while (mutableQueue.size() > 1 && numbers[mutableQueue.peek().getLastSubsequenceElement() - 1] < numbers[i]) {
                     mutableQueue.poll();
                 }
-                if (mutableQueue.peek().getLastSubsequenceElement() < numbers[i]) {
+                if (numbers[mutableQueue.peek().getLastSubsequenceElement() - 1] < numbers[i]) {
                     LinkedList<Integer> linkedList = new LinkedList<>();
-                    linkedList.add(numbers[i]);
+                    linkedList.add(i + 1);
                     Point point = new Point(numbers[i], i, linkedList);
                     pointPriorityQueue.add(point);
                 } else {
                     Point point = mutableQueue.poll();
-                    LinkedList<Integer> list = point.getSubsequence();
+                    LinkedList<Integer> list = point.getSubsequenceIndices();
                     LinkedList<Integer> linkedList = (LinkedList<Integer>) list.clone();
-                    linkedList.add(numbers[i]);
+                    linkedList.add(i + 1);
                     Point newPoint = new Point(numbers[i], i, linkedList);
                     pointPriorityQueue.add(newPoint);
                 }
@@ -66,15 +72,15 @@ class Point {
 
     private int value;
     private int index;
-    private LinkedList<Integer> subsequence;
+    private LinkedList<Integer> subsequenceIndices;
 
     private Integer lastSubsequenceElement;
 
-    Point(int value, int index, LinkedList<Integer> subsequence) {
+    Point(int value, int index, LinkedList<Integer> subsequenceIndices) {
         this.value = value;
         this.index = index;
-        this.subsequence = subsequence;
-        this.lastSubsequenceElement = subsequence.peekLast();
+        this.subsequenceIndices = subsequenceIndices;
+        this.lastSubsequenceElement = subsequenceIndices.peekLast();
     }
 
     public int getValue() {
@@ -89,8 +95,8 @@ class Point {
         return lastSubsequenceElement;
     }
 
-    public LinkedList<Integer> getSubsequence() {
-        return subsequence;
+    public LinkedList<Integer> getSubsequenceIndices() {
+        return subsequenceIndices;
     }
 }
 
@@ -98,7 +104,7 @@ class PointComparator implements Comparator<Point> {
 
     @Override
     public int compare(Point o1, Point o2) {
-        return Integer.compare(o2.getSubsequence().size(), o1.getSubsequence().size());
+        return Integer.compare(o2.getSubsequenceIndices().size(), o1.getSubsequenceIndices().size());
     }
 }
 
