@@ -9,18 +9,20 @@ class NotIncreasing {
 
     public static void main(String[] args) {
         try (BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in))) {
-            int numberQuantity = Integer.parseInt(bufferReader.readLine());
+            String firstLine = bufferReader.readLine();
             String[] numberStrings = bufferReader.readLine().split(" ");
-            int[] numbers = new int[numberQuantity];
+            int numberStringsLength = numberStrings.length;
+            ;
+            int[] numbers = new int[numberStringsLength];
 
-            for (int i = 0; i < numberQuantity; i++) {
+            for (int i = 0; i < numberStringsLength; i++) {
                 numbers[i] = Integer.parseInt(numberStrings[i]);
             }
 
             PriorityQueue<Point> queue = createPriorityQueue(numbers);
             Point point = queue.poll();
-            List<Integer> list = point.getSubsequenceIndices();
-            List<String> stringList = new ArrayList<>(list.size());
+            LinkedList<Integer> list = point.getSubsequenceIndices();
+            LinkedList<String> stringList = new LinkedList<>();
             for (int integer : list) {
                 stringList.add(String.valueOf(integer));
             }
@@ -60,7 +62,6 @@ class NotIncreasing {
                     pointPriorityQueue.add(newPoint);
                 }
             }
-
         }
         return pointPriorityQueue;
     }
