@@ -41,7 +41,7 @@ class NotIncreasing {
             if (i == 0) {
                 LinkedList<Integer> linkedList = new LinkedList<>();
                 linkedList.add(i + 1);
-                Point point = new Point(numbers[i], i, linkedList);
+                Point point = new Point(linkedList);
                 pointPriorityQueue.add(point);
             } else {
                 PriorityQueue<Point> mutableQueue = new PriorityQueue<>(pointPriorityQueue);
@@ -51,14 +51,14 @@ class NotIncreasing {
                 if (numbers[mutableQueue.peek().getLastSubsequenceElement() - 1] < numbers[i]) {
                     LinkedList<Integer> linkedList = new LinkedList<>();
                     linkedList.add(i + 1);
-                    Point point = new Point(numbers[i], i, linkedList);
+                    Point point = new Point(linkedList);
                     pointPriorityQueue.add(point);
                 } else {
                     Point point = mutableQueue.poll();
                     LinkedList<Integer> list = point.getSubsequenceIndices();
                     LinkedList<Integer> linkedList = (LinkedList<Integer>) list.clone();
                     linkedList.add(i + 1);
-                    Point newPoint = new Point(numbers[i], i, linkedList);
+                    Point newPoint = new Point(linkedList);
                     pointPriorityQueue.add(newPoint);
                 }
             }
@@ -71,25 +71,13 @@ class NotIncreasing {
 
 class Point {
 
-    private int value;
-    private int index;
     private LinkedList<Integer> subsequenceIndices;
 
     private Integer lastSubsequenceElement;
 
-    Point(int value, int index, LinkedList<Integer> subsequenceIndices) {
-        this.value = value;
-        this.index = index;
+    Point(LinkedList<Integer> subsequenceIndices) {
         this.subsequenceIndices = subsequenceIndices;
         this.lastSubsequenceElement = subsequenceIndices.peekLast();
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public int getIndex() {
-        return index;
     }
 
     public Integer getLastSubsequenceElement() {
