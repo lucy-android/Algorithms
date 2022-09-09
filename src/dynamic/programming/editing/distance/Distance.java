@@ -30,23 +30,13 @@ class Distance {
             }
         }
 
-        // TODO initialize the first column and the first line
-
         for (int i = 0; i <= firstLength; i++) {
-            if (i == 0) {
-                twoDimensionalArray[i][0] = 0;
-            } else {
-                twoDimensionalArray[i][0] = i;
-            }
+            twoDimensionalArray[i][0] = i;
         }
 
 
         for (int i = 0; i <= secondLength; i++) {
-            if (i == 0) {
-                twoDimensionalArray[0][i] = 0;
-            } else {
-                twoDimensionalArray[0][i] = i;
-            }
+            twoDimensionalArray[0][i] = i;
         }
 
         twoDimensionalArray[0][0] = 0;
@@ -80,14 +70,13 @@ class Distance {
         }
         return 1;
     }
+}
 
-
-    private static void printOutTheResultingArray(int[][] twoDimensionalArray) {
+/* private static void printOutTheResultingArray(int[][] twoDimensionalArray) {
         for (int i = 0; i < twoDimensionalArray.length; i++) {
             for (int j = 0; j < twoDimensionalArray[0].length; j++) {
                 System.out.printf("%5d ", twoDimensionalArray[i][j]);
             }
             System.out.println();
         }
-    }
-}
+    }*/
