@@ -71,12 +71,3 @@ class Distance {
         return 1;
     }
 }
-
-/* private static void printOutTheResultingArray(int[][] twoDimensionalArray) {
-        for (int i = 0; i < twoDimensionalArray.length; i++) {
-            for (int j = 0; j < twoDimensionalArray[0].length; j++) {
-                System.out.printf("%5d ", twoDimensionalArray[i][j]);
-            }
-            System.out.println();
-        }
-    }*/
