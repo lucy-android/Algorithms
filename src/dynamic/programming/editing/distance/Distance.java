@@ -51,15 +51,13 @@ class Distance {
 
         for (int i = 1; i <= firstLength; i++) {
             for (int j = 1; j <= secondLength; j++) {
-                if(i == 1 && j == 1){
+                if (i == 1 && j == 1) {
                     twoDimensionalArray[i][j] = 0;
+                } else {
+                    int diff = findDiff(firstWordSymbols[i - 1], secondWordSymbols[j - 1]);
+                    twoDimensionalArray[i][j] = findMinimumOfThree(twoDimensionalArray[i - 1][j] + 1, twoDimensionalArray[i][j - 1] + 1, twoDimensionalArray[i - 1][j - 1] + diff);
                 }
                 //TODO берем только такие квадратики, где одна минус единица.
-
-                int diff = findDiff(firstWordSymbols[i - 1], secondWordSymbols[j - 1]);
-
-
-                // twoDimensionalArray[i][j] = findMinimum(twoDimensionalArray[i-2][j-2]);
             }
         }
 
@@ -67,6 +65,16 @@ class Distance {
         printOutTheResultingArray(twoDimensionalArray);
 
         return 0;
+    }
+
+    private static int findMinimumOfThree(int first, int second, int third) {
+        if (first <= second && first <= third) {
+            return first;
+        } else if (second <= first && second <= third) {
+            return second;
+        } else {
+            return third;
+        }
     }
 
     private static int findDiff(char firstWordSymbol, char secondWordSymbol) {
