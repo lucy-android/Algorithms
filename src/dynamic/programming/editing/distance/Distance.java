@@ -12,7 +12,7 @@ class Distance {
             String secondLine = bufferReader.readLine();
             char[] firstWordSymbols = firstLine.toCharArray();
             char[] secondWordSymbols = secondLine.toCharArray();
-            calculateEditingDistance(firstWordSymbols, secondWordSymbols);
+            System.out.println(calculateEditingDistance(firstWordSymbols, secondWordSymbols));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -33,38 +33,35 @@ class Distance {
         // TODO initialize the first column and the first line
 
         for (int i = 0; i <= firstLength; i++) {
-            if (i == 0 || i == 1) {
+            if (i == 0) {
                 twoDimensionalArray[i][0] = 0;
             } else {
-                twoDimensionalArray[i][0] = i - 1;
+                twoDimensionalArray[i][0] = i;
             }
         }
 
 
         for (int i = 0; i <= secondLength; i++) {
-            if (i == 0 || i == 1) {
+            if (i == 0) {
                 twoDimensionalArray[0][i] = 0;
             } else {
-                twoDimensionalArray[0][i] = i - 1;
+                twoDimensionalArray[0][i] = i;
             }
         }
 
+        twoDimensionalArray[0][0] = 0;
         for (int i = 1; i <= firstLength; i++) {
             for (int j = 1; j <= secondLength; j++) {
-                if (i == 1 && j == 1) {
-                    twoDimensionalArray[i][j] = 0;
-                } else {
-                    int diff = findDiff(firstWordSymbols[i - 1], secondWordSymbols[j - 1]);
-                    twoDimensionalArray[i][j] = findMinimumOfThree(twoDimensionalArray[i - 1][j] + 1, twoDimensionalArray[i][j - 1] + 1, twoDimensionalArray[i - 1][j - 1] + diff);
-                }
-                //TODO берем только такие квадратики, где одна минус единица.
+                int diff = findDiff(firstWordSymbols[i - 1], secondWordSymbols[j - 1]);
+                twoDimensionalArray[i][j] = findMinimumOfThree(
+                        twoDimensionalArray[i - 1][j] + 1,
+                        twoDimensionalArray[i][j - 1] + 1,
+                        twoDimensionalArray[i - 1][j - 1] + diff);
+
             }
         }
 
-
-        printOutTheResultingArray(twoDimensionalArray);
-
-        return 0;
+        return twoDimensionalArray[firstLength][secondLength];
     }
 
     private static int findMinimumOfThree(int first, int second, int third) {
